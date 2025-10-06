@@ -1,25 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <header>
-        <div id="webapp_name">
-            <h1 id="title">Meal Planner</h1>
-            <em><p id="subtitle">Healthy Lifestyle</p></em>
-        </div>
-        <nav>
-            <a href="" class="btn" id="active">Main</a>
-            <a href="" class="btn">Entries</a>
-            <a href="" class="btn">Salads</a>
-            <a href="" class="btn">Appetizers</a>
-            <a href="" class="btn">Desserts</a>
-            <a href="" class="btn">Drinks</a>
-        </nav>
+      <div id="webapp_name" class="shadow" >
+        <img
+          src="./imgs/chef_hat.png"
+          alt="Chefs hat illustration"
+          height="25%"
+          width="25%"
+        />
+        <h1 id="title">Meal Planner</h1>
+        <em><p id="subtitle">Healthy Lifestyle</p></em>
+      </div>
+      <nav class="shadow">
+        <a href="#" class="btn" id="active">Main</a>
+        <a href="#" class="btn">Entries</a>
+        <a href="#" class="btn">Salads</a>
+        <a href="#" class="btn">Appetizers</a>
+        <a href="#" class="btn">Desserts</a>
+        <a href="./drinks.html" class="btn">Drinks</a>
+      </nav>
+      <a href="tel:+1-123-456-7890" class="shadow" id="phone">+1-123-456-7890</a>
     </header>
-</body>
+    <section>
+      <h1 id="webapp_dscrpt">
+        Meal Planner <span id="green_text">helps you track</span> calories and macros for smarter eating.
+      </h1>
+      <button class="meal_btn shadow" id="create_own">Create</button>
+      <button class="meal_btn shadow" id="random">Random</buttin>
+    </section>
+    <div id="big_bgcircle" class="shadow">
+      <img src="./imgs/main_startPhoto.jpg" alt="" id="dish_photo">
+    </div>
+    <div id="changePic_btns">
+      <button id="previous" class="changeImg_btn"><</button>
+      <span class="circle" id="circle1"></span>
+      <span class="circle" id="circle2"></span>
+      <span class="circle" id="circle3"></span>
+      <span class="circle" id="circle4"></span>
+      <span class="circle" id="circle5"></span>
+      <button id="next" class="changeImg_btn">></button>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
