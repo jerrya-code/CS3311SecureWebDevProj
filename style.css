@@ -40,10 +40,66 @@ nav{
     justify-content: space-evenly;
     padding-left: 5vw;
     align-items: center;
+    /*Nav bar needs adjustment*/
+    flex-wrap: wrap;
 }
 .btn{
     text-decoration: none;
 }
 #active{
     color: #64D370;
+}
+
+.carousel-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 100vw;
+    position: relative;
+    top: -5vh;
+}
+
+.carousel-slide {
+    display: flex;
+    overflow-x: hidden; /*Hide horizontal scrollbar*/
+    scroll-behavior: smooth; /*Smooth scrolling*/
+    gap: 20px; /*Space between cards*/
+    padding: 20px;
+}
+
+.carousel-slide img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 1px 1px 25px #5656564D;
+}
+
+.arrow-left, .arrow-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+}
+
+.arrow-left:hover, .arrow-right:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.arrow-left {
+    left: 10px;
+    padding: 10px 15px;
+}
+
+.arrow-right {
+    right: 10px;
+    padding: 10px 15px;
 }
