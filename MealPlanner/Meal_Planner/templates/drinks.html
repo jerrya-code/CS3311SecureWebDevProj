@@ -3,9 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="./drinks.css">
+    <script src="./javascript.js" defer></script>
 </head>
 <body>
-    
+    <header>
+        <div id="webapp_name">
+            <h1 id="title">Meal Planner</h1>
+            <em><p id="subtitle">Healthy Lifestyle</p></em>
+        </div>
+        <nav>
+            <a href="index.html" class="btn">Main</a>
+            <a href="" class="btn">Entries</a>
+            <a href="" class="btn">Salads</a>
+            <a href="" class="btn">Appetizers</a>
+            <a href="" class="btn">Desserts</a>
+            <a href="drinks.html" class="btn" id="active">Drinks</a>
+        </nav>
+
+        <!--A carousel of different drink options to choose from-->
+        <div class = "carousel-container">
+            <button class = "arrow-left">&#10094;</button>
+
+            <div class = "carousel-slide">
+                <img src = "drink_carousel_imgs\Fanta.jfif" id = "last-clone" alt = "Drink 1">
+                <img src = "drink_carousel_imgs\Canada_Dry.jfif" alt = "Drink 2">
+                <img src = "drink_carousel_imgs\mtnDew.jfif" alt = "Drink 3">
+                <img src = "drink_carousel_imgs\pepsi.jfif" alt = "Drink 4">
+                <img src = "drink_carousel_imgs\smarwater.jfif" alt = "Drink 5">
+                <img src = "drink_carousel_imgs\Fanta.jfif" id = "first-clone" alt = "Drink 1">
+        </div>
+
+        <button class = "arrow-right">&#10095;</button>
+    </div>
+    </header>
 </body>
 </html>
