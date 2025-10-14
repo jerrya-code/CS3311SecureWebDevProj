@@ -11,9 +11,10 @@ body {
 
 @font-face {
     font-family: "Montserrat";
-    src: url("./fonts/Montserrat-Regular.ttf") format("truetype");
+    src: url("{% static 'Meal_Planner/fonts/Montserrat-Regular.ttf' %}") format("truetype");
     font-weight: 400;
 }
+
 #webapp_name{
     border-radius: 150px;
     width: 264px;
@@ -146,29 +147,61 @@ button{
 }
 
 .carousel-container{
+    width: 70vw;
+    max-width: 1100px;
+    height: 60vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 60vh;
-    width: 100vw;
     position: relative;
     top: -5vh;
+    margin: 0 auto;
+    overflow: hidden; /*Hides other cards*/
 }
 
 .carousel-slide {
     display: flex;
-    overflow-x: hidden; /*Hide horizontal scrollbar*/
-    scroll-behavior: smooth; /*Smooth scrolling*/
-    gap: 20px; /*Space between cards*/
-    padding: 20px;
+    gap: 40px;
+    padding: 20px 40px; /* Padding around the cards */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling effect */
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+    align-items: center; /* vertically center cards */
+    box-sizing: border-box; /* Include padding in width calculations */
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+
 }
 
-.carousel-slide img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 15px;
+.card{
+    min-width: 300px;
+    height: 300px;
+    background-color: white;
     box-shadow: 1px 1px 25px #5656564D;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: scale(0.9); /* Slightly smaller by default */
+    opacity: 0.7; /* Less opaque by default */
+}
+
+.card.active {
+    transform: scale(1.05); /* Full size when active */
+    opacity: 1; /* Fully opaque when active */
+}
+
+.card-info {
+    padding: 15px;
+}
+
+.card-info h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.card-info p {
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
 .arrow-left, .arrow-right {
@@ -182,6 +215,7 @@ button{
     z-index: 10;
     border-radius: 50%;
     font-size: 1.5rem;
+    padding: 10px 15px;
     transition: background-color 0.3s;
 }
 

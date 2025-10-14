@@ -1,11 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Planner</title>
-    <link rel="stylesheet" href="./drinks.css">
-    <script src="./javascript.js" defer></script>
+    <link rel="stylesheet" type = "text/css" href="{% static 'Meal_Planner/drinks.css' %}">
 </head>
 <body>
     <header>
@@ -14,12 +14,13 @@
             <em><p id="subtitle">Healthy Lifestyle</p></em>
         </div>
         <nav>
-            <a href="index.html" class="btn">Main</a>
-            <a href="" class="btn">Entries</a>
-            <a href="" class="btn">Salads</a>
-            <a href="" class="btn">Appetizers</a>
-            <a href="" class="btn">Desserts</a>
-            <a href="drinks.html" class="btn" id="active">Drinks</a>
+            <a href="/" class="btn">Main</a>
+            <a href="{% static 'index.html' %}" class="btn">Main</a>
+            <a href="{% static 'entries.html' %}" class="btn">Entries</a>
+            <a href="{% static 'salads.html' %}" class="btn">Salads</a>
+            <a href="{% static 'appetizers.html' %}" class="btn">Appetizers</a>
+            <a href="{% static 'desserts.html' %}" class="btn">Desserts</a>
+            <a href="{% static 'drinks.html' %}" class="btn" id="active">Drinks</a>
         </nav>
 
         <!--A carousel of different drink options to choose from-->
@@ -27,16 +28,29 @@
             <button class = "arrow-left">&#10094;</button>
 
             <div class = "carousel-slide">
-                <img src = "drink_carousel_imgs\Fanta.jfif" id = "last-clone" alt = "Drink 1">
-                <img src = "drink_carousel_imgs\Canada_Dry.jfif" alt = "Drink 2">
-                <img src = "drink_carousel_imgs\mtnDew.jfif" alt = "Drink 3">
-                <img src = "drink_carousel_imgs\pepsi.jfif" alt = "Drink 4">
-                <img src = "drink_carousel_imgs\smarwater.jfif" alt = "Drink 5">
-                <img src = "drink_carousel_imgs\Fanta.jfif" id = "first-clone" alt = "Drink 1">
-        </div>
-
-        <button class = "arrow-right">&#10095;</button>
+                    {% for item in items %}
+                        <div class="card">
+                            {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                            {% else %}
+                            <img src="{% static 'Meal_Planner/imgs/Fanta.jfif' %}" alt="{{ item.title }}">
+                            {% endif %}
+                            <div class="card-info">
+                                <h2>{{ item.title }}</h2>
+                                <p>{{ item.description }}</p>
+                                <p>Proteins: {{ item.proteins }}g</p>
+                                <p>Fats: {{ item.fats }}g</p>
+                                <p>Carbohydrates: {{ item.carbohydrates }}g</p>
+                            </div>
+                        </div>
+                        {% empty %}
+                            <p>No items found for this category.</p>
+                    {% endfor %}
+                </div>
+    <button class = "arrow-right">&#10095;</button>
     </div>
+    
     </header>
+    <script src="{% static 'Meal_Planner/drinks.js' %}" defer></script>
 </body>
 </html>
