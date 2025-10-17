@@ -34,7 +34,7 @@
         Meal Planner <span id="green_text">helps you track</span> calories and macros for smarter eating.
       </h1>
       <button class="meal_btn shadow" id="create_own">Create</button>
-      <button class="meal_btn shadow" id="random">Random</buttin>
+      <button class="meal_btn shadow" id="random">Random</button>
     </section>
     <div id="big_bgcircle" class="shadow">
       <img src="{% static 'Meal_Planner/imgs/main_startPhoto.jpg' %}" alt="" id="dish_photo">
@@ -47,19 +47,29 @@
       <span class="circle" id="circle4"></span>
       <span class="circle" id="circle5"></span>
       <button id="next" class="changeImg_btn">></button>
-    </div>
+    </div> <br><br>
 
-    <div id = "FormSection">
-      <form id = "RegistrateForm" style="display:none;"> 
+
+    <div id = "FormSection" class = "FormSection"><br> 
+
+      <div class = "form_container">
+        <form id = "RegistrateForm"> 
+        <input type = "text" name = "first_name" placeholder="Enter Your First Name..."> <br>
+        <input type = "text" name = "last_name" placeholder="Enter Your Last Name..."> <br>
+        <input type = "text" name = "email" placeholder="Enter Your Email..."> <br>
+        <input type = "text" name = "username" placeholder="Create a Username..."> <br>
+        <input type = "password" name = "password" placeholder="Create a Password..."> <br>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptatem itaque aliquid deserunt! Dolorem totam odit facere minima ab quos harum numquam sit?</p>
       </form>
       <button id = "RegisterButton">Register</button>
 
       <form id = "LoginForm"> 
-        <input type = 
+        <input type = "text" name = "username" placeholder="Enter Your Username...">
+        <input type = "password" name = "password" placeholder="Enter Your Password...">
       </form>
       <button id = "LoginButton">Login</button>
 
+      </div>
     </div>
 
 
