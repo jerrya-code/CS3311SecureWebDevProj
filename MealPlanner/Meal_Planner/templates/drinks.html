@@ -1,56 +1,61 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
-    <link rel="stylesheet" type = "text/css" href="{% static 'Meal_Planner/drinks.css' %}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'Meal_Planner/drinks.css' %}"
+    />
+  </head>
+  <body>
     <header>
-        <div id="webapp_name">
-            <h1 id="title">Meal Planner</h1>
-            <em><p id="subtitle">Healthy Lifestyle</p></em>
+      <div id="webapp_name">
+        <h1 id="title">Meal Planner</h1>
+        <em><p id="subtitle">Healthy Lifestyle</p></em>
+      </div>
+      <nav>
+        <a href="{% url 'main'%}" class="btn" id="active">Main</a>
+        <a href="{% url 'category' 'entries'%}" class="btn">Entries</a>
+        <a href="{% url 'category' 'salads'%}" class="btn">Salads</a>
+        <a href="{% url 'category' 'appetizers'%}" class="btn">Appetizers</a>
+        <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
+        <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
+      </nav>
+
+      <!--A carousel of different drink options to choose from-->
+      <div class="carousel-container">
+        <button class="arrow-left">&#10094;</button>
+
+        <div class="carousel-slide">
+          {% for item in items %}
+          <div class="card">
+            {% if item.image %}
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" />
+            {% else %}
+            <img
+              src="{% static 'Meal_Planner/imgs/Fanta.jfif' %}"
+              alt="{{ item.title }}"
+            />
+            {% endif %}
+            <div class="card-info">
+              <h2>{{ item.title }}</h2>
+              <p>{{ item.description }}</p>
+              <p>Proteins: {{ item.proteins }}g</p>
+              <p>Fats: {{ item.fats }}g</p>
+              <p>Carbohydrates: {{ item.carbohydrates }}g</p>
+            </div>
+          </div>
+          {% empty %}
+          <p>No items found for this category.</p>
+          {% endfor %}
         </div>
-        <nav>
-            <a href="/" class="btn">Main</a>
-            <a href="{% static 'index.html' %}" class="btn">Main</a>
-            <a href="{% static 'entries.html' %}" class="btn">Entries</a>
-            <a href="{% static 'salads.html' %}" class="btn">Salads</a>
-            <a href="{% static 'appetizers.html' %}" class="btn">Appetizers</a>
-            <a href="{% static 'desserts.html' %}" class="btn">Desserts</a>
-            <a href="{% static 'drinks.html' %}" class="btn" id="active">Drinks</a>
-        </nav>
-
-        <!--A carousel of different drink options to choose from-->
-        <div class = "carousel-container">
-            <button class = "arrow-left">&#10094;</button>
-
-            <div class = "carousel-slide">
-                    {% for item in items %}
-                        <div class="card">
-                            {% if item.image %}
-                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                            {% else %}
-                            <img src="{% static 'Meal_Planner/imgs/Fanta.jfif' %}" alt="{{ item.title }}">
-                            {% endif %}
-                            <div class="card-info">
-                                <h2>{{ item.title }}</h2>
-                                <p>{{ item.description }}</p>
-                                <p>Proteins: {{ item.proteins }}g</p>
-                                <p>Fats: {{ item.fats }}g</p>
-                                <p>Carbohydrates: {{ item.carbohydrates }}g</p>
-                            </div>
-                        </div>
-                        {% empty %}
-                            <p>No items found for this category.</p>
-                    {% endfor %}
-                </div>
-    <button class = "arrow-right">&#10095;</button>
-    </div>
-    
+        <button class="arrow-right">&#10095;</button>
+      </div>
     </header>
     <script src="{% static 'Meal_Planner/drinks.js' %}" defer></script>
-</body>
+  </body>
 </html>

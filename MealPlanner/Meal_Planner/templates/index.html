@@ -20,12 +20,12 @@
         <em><p id="subtitle">Healthy Lifestyle</p></em>
       </div>
       <nav class="shadow">
-        <a href="#" class="btn" id="active">Main</a>
-        <a href="#" class="btn">Entries</a>
-        <a href="#" class="btn">Salads</a>
-        <a href="#" class="btn">Appetizers</a>
-        <a href="#" class="btn">Desserts</a>
-        <a href="./drinks.html" class="btn">Drinks</a>
+        <a href="{% url 'main'%}" class="btn" id="active">Main</a>
+        <a href="{% url 'category' 'entries'%}" class="btn">Entries</a>
+        <a href="{% url 'category' 'salads'%}" class="btn">Salads</a>
+        <a href="{% url 'category' 'appetizers'%}" class="btn">Appetizers</a>
+        <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
+        <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
       </nav>
       <a href="tel:+1-123-456-7890" class="shadow" id="phone">+1-123-456-7890</a>
     </header>
