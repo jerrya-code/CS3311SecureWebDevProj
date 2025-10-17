@@ -5,15 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'Meal_Planner/drinks.css' %}"
-    />
+    <link rel="stylesheet" type="text/css" href="{% static 'Meal_Planner/drinks.css' %}"/>
   </head>
   <body>
     <header>
-      <div id="webapp_name" class="shadow" >
+      <div id="webapp_name" class="shadow">
         <img
           src="{% static 'Meal_Planner/imgs/chef_hat.png' %}"
           alt="Chefs hat illustration"
@@ -31,38 +27,27 @@
         <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
         <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
       </nav>
-      <a href="tel:+1-123-456-7890" class="shadow" id="phone">+1-123-456-7890</a>
+      <a href="tel:+1-123-456-7890" class="shadow" id="phone"
+        >+1-123-456-7890</a
+      >
     </header>
 
-      <!--A carousel of different drink options to choose from-->
-      <div>
-        <button class="arrow-left">&#10094;</button>
-
-        <div class="carousel-slide">
-          {% for item in items %}
-          <div class="card">
-            {% if item.image %}
-            <img src="{{ item.image.url }}" alt="{{ item.title }}" />
-            {% else %}
-            <img
-              src="{% static 'Meal_Planner/imgs/Fanta.jfif' %}"
-              alt="{{ item.title }}"
-            />
-            {% endif %}
-            <div class="card-info">
-              <h2>{{ item.title }}</h2>
-              <p>{{ item.description }}</p>
-              <p>Proteins: {{ item.proteins }}g</p>
-              <p>Fats: {{ item.fats }}g</p>
-              <p>Carbohydrates: {{ item.carbohydrates }}g</p>
-            </div>
-          </div>
-          {% empty %}
-          <p>No items found for this category.</p>
-          {% endfor %}
-        </div>
-        <button class="arrow-right">&#10095;</button>
+    <main>
+      {% for item in items %}
+      <div class="card">
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" />
+        {% endif %}
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <p>Proteins: {{ item.proteins }}g</p>
+        <p>Fats: {{ item.fats }}g</p>
+        <p>Carbohydrates: {{ item.carbohydrates }}g</p>
       </div>
-    <script src="{% static 'Meal_Planner/drinks.js' %}" defer></script>
+      {% empty %}
+      <p>No items found for this category.</p>
+      {% endfor %}
+    </main>
+    <script src="{% static 'Meal_Planner/drinks.js' %}"></script>
   </body>
 </html>
