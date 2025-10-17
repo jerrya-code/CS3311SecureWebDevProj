@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal Planner</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'Meal_Planner/edit.css' %}"/>
+  </head>
+  <body>
+  {% block content %}
+  <h2>Edit {{ card.title }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+    <a href="{% url 'category' card.category %}">Cancel</a>
+  </form>
+  {% endblock %}
+  </body>
+</html>

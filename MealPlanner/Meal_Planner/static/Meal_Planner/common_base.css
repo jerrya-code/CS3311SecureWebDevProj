@@ -1,0 +1,112 @@
+@font-face {
+    font-family: "Montserrat";
+    src: url("{% static 'Meal_Planner/fonts/Montserrat-Regular.ttf' %}") format("truetype");
+    font-weight: 400;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+    color: black;
+}
+body{
+    overflow-x: hidden;
+}
+
+#webapp_name{
+    border-radius: 150px;
+    width: 264px;
+    height: 264px;
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 7vw;
+    position: relative;
+    top: -5vh;
+    background-color: white;
+}
+#title{
+    height: 60px;
+}
+nav{
+    display: inline-flex;
+    width: 40vw;
+    height: 8vh;
+    border-radius: 50px;
+    position: relative;
+    top: -2vh;
+    left: -4vw;
+    z-index: 2;
+    background-color: white;
+    justify-content: space-evenly;
+    margin-left: 4vw;
+    align-items: center;
+    /*Nav bar needs adjustment*/
+    flex-wrap: wrap;
+    font-weight: 900;
+
+}
+.btn{
+    text-decoration: none;
+}
+#active, #phone, #green_text{
+    color: #64D370;
+}
+.hyper{
+    display: inline-flex;
+    background-color: white;
+    border-radius: 50px;
+    position: relative;
+    top: -2vh;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 15vw;
+    text-decoration: none;
+    font-weight: 900;
+}
+#login{
+    margin-left: 3vw;
+    width: 7vw;
+}
+
+.shadow{
+    box-shadow: 1px 1px 25px #5656564D;
+}
+
+.active{
+    scale: 1.5;
+}
+
+button{
+    cursor: pointer;
+}
+main{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 3vh;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 28vw;
+}
+img, .card{
+    border-radius: 5%;
+}
+p{
+    margin-bottom: 1%;
+}
+.order_btn{
+    border-radius: 50px;
+    width: 25%;
+    font-size: 1.5rem;
+    border: none;
+    background-color: #64D370;
+    color: white;
+}

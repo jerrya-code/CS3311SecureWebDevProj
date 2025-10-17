@@ -20,7 +20,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-left: 15vw;
+    margin-left: 7vw;
     position: relative;
     top: -5vh;
     background-color: white;
@@ -43,6 +43,8 @@ nav{
     align-items: center;
     /*Nav bar needs adjustment*/
     flex-wrap: wrap;
+    font-weight: 900;
+
 }
 .btn{
     text-decoration: none;
@@ -50,7 +52,7 @@ nav{
 #active, #phone, #green_text{
     color: #64D370;
 }
-#phone{
+.hyper{
     display: inline-flex;
     background-color: white;
     border-radius: 50px;
@@ -62,6 +64,10 @@ nav{
     width: 15vw;
     text-decoration: none;
     font-weight: 900;
+}
+#login{
+    margin-left: 3vw;
+    width: 7vw;
 }
 section{
     width: 35vw;
