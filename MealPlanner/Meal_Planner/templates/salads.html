@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal Planner</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'Meal_Planner/common_base.css' %}"/>
+  </head>
+  <body>
+    <header>
+      <div id="webapp_name" class="shadow">
+        <img
+          src="{% static 'Meal_Planner/imgs/chef_hat.png' %}"
+          alt="Chefs hat illustration"
+          height="25%"
+          width="25%"
+        />
+        <h1 id="title">Meal Planner</h1>
+        <em><p id="subtitle">Healthy Lifestyle</p></em>
+      </div>
+      <nav class="shadow">
+        <a href="{% url 'main'%}" class="btn">Main</a>
+        <a href="{% url 'category' 'entries'%}" class="btn">Entries</a>
+        <a href="{% url 'category' 'salads'%}" class="btn" id="active">Salads</a>
+        <a href="{% url 'category' 'appetizers'%}" class="btn">Appetizers</a>
+        <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
+        <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
+      </nav>
+      <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a>
+      <a href="#" class="shadow hyper" id="login">Log In</a>
+    </header>
+
+    <main>
+      {% for item in items %}
+      {% if item.category == category%}
+      <div class="card shadow">
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
+        {% endif %}
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <p>Proteins: {{ item.proteins }}g</p>
+        <p>Fats: {{ item.fats }}g</p>
+        <p>Carbohydrates: {{ item.carbohydrates }}g</p>
+        <button class="order_btn">Select</button>
+        {% if request.user.is_superuser %}
+        <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
+        <a href="{% url 'edit_card' category=item.category primary_key=item.pk %}" >Edit</a>
+        {% endif %}
+
+      </div>
+      {% endif %}
+      {% empty %}
+      <p>No items found for this category.</p>
+      {% endfor %}
+      {% if user.is_superuser %}
+      <div class="card shadow">
+        <button>+</button>
+      </div>
+      {% endif %}
+    </main>
+    <script src="{% static 'Meal_Planner/drinks.js' %}"></script>
+  </body>
+</html>
