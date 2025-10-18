@@ -9,7 +9,7 @@ body{
 }
 @font-face {
     font-family: "Montserrat";
-    src: url("{% static 'Meal_Planner/fonts/Montserrat-Regular.ttf' %}") format("truetype");
+    src: url("fonts/Montserrat-Regular.ttf") format("truetype");
     font-weight: 400;
 }
 #webapp_name{
@@ -147,20 +147,22 @@ button{
 #FormSection{
     display: flex;
     flex-direction: column;
-    padding: 2vh;
+    padding: 5vh;
     justify-content: center;
     background-color: rgb(0, 0, 0, 0.7);
-    margin-top: 5vh;
+    margin-top: 38vh;
 
 }
 
 #RegistrateForm, #LoginForm{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto auto 1fr 2fr;
+    gap: 10px;
     margin-bottom: 2vh;
-    width: 23vw;
-
-
+    width: 40vw;
+    background-color: gray;
+    padding: 2vh;
+    border-radius: 15px;
 }
 
 input[type = text], input[type = password], input[type = email]{
@@ -168,7 +170,26 @@ input[type = text], input[type = password], input[type = email]{
     padding: 0.5rem;
     border-radius: 10px;
     border: 1px solid #ccc;
-    font-size: 1vmax;
+    font-size: 10px;
 }
+
+.form_input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.RegisterTerms{
+    color: white;
+}
+
+#RegisterButton, #LoginButton{
+    padding: 1vh;
+    border-radius: 10px;
+    border: none;
+    background-color: #64D370;
+    color: white;
+    font-size: 1.2vmax;
+}
+
 
 

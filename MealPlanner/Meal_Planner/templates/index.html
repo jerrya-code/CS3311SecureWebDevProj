@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
     <link rel="stylesheet" type="text/css" href="{% static 'Meal_Planner/style.css' %}" />
+    <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon"> <!--Was causing error w/o this-->
   </head>
   <body>
-    <header>
+      <header>
       <div id="webapp_name" class="shadow" >
         <img
           src="{% static 'Meal_Planner/imgs/chef_hat.png' %}"
@@ -50,25 +51,32 @@
     </div> <br><br>
 
 
-    <div id = "FormSection" class = "FormSection"><br> 
+    <div id = "FormSection" class = "FormSection">
 
       <div class = "form_container">
-        <form id = "RegistrateForm"> 
-        <input type = "text" name = "first_name" placeholder="Enter Your First Name..."> <br>
-        <input type = "text" name = "last_name" placeholder="Enter Your Last Name..."> <br>
-        <input type = "email" name = "email" placeholder="Enter Your Email..."> <br>
-        <input type = "text" name = "username" placeholder="Create a Username..."> <br>
-        <input type = "password" name = "password" placeholder="Create a Password..."> <br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptatem itaque aliquid deserunt! Dolorem totam odit facere minima ab quos harum numquam sit?</p>
-      </form>
-      <button id = "RegisterButton">Register</button>
+        <form id = "RegistrateForm" method = "post" action = "/register/" >
+        <input class = "form_input" type = "text" name = "first_name" placeholder="Enter Your First Name..."> <br>
+        <input class = "form_input" type = "text" name = "last_name" placeholder="Enter Your Last Name..."> <br>
+        <input class = "form_input" type = "email" name = "email" placeholder="Enter Your Email..."> <br>
+        <input class = "form_input" type = "text" name = "username" placeholder="Create a Username..."> <br>
+        <input class = "form_input" type = "password" name = "password" placeholder="Create a Password..."> <br>
+        <p class = "RegisterTerms">By registering, you agree to our Terms and Conditions. </p>
 
-      <form id = "LoginForm"> 
+         <button id = "RegisterButton" type = "submit" form = "RegistrateForm">Register</button>
+
+      </form>
+     
+      <form id = "LoginForm" method = "post" action = "/login/">
         <input type = "text" name = "username" placeholder="Enter Your Username...">
         <input type = "password" name = "password" placeholder="Enter Your Password...">
-      </form>
-      <button id = "LoginButton">Login</button>
 
+        <button id = "LoginButton" type = "submit" form = "LoginForm">Login</button> <br>
+      <span>Don't have an account? Register here. -> </span>
+      <br> 
+      <button id = "toRegister" class="form_switch_btn">Registration Form</button>
+
+      </form>
+      
       </div>
     </div>
 
