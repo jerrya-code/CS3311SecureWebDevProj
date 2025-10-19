@@ -116,6 +116,7 @@ section{
     top: 35%;
     left: 10%;
 }
+
 .circle{
     display: inline-block;
     width: 0.5vmax;
@@ -147,30 +148,134 @@ button{
 #FormSection{
     display: flex;
     flex-direction: column;
-    padding: 5vh;
+    width: 100%;
+    padding: 5vh 0;
     justify-content: center;
+    align-items: center;
     background-color: rgb(0, 0, 0, 0.7);
     margin-top: 38vh;
-
+    box-sizing: border-box;
 }
 
-#RegistrateForm, #LoginForm{
+#RegistrateForm {
+    height: 100%;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: auto auto 1fr 2fr;
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
     margin-bottom: 2vh;
-    width: 40vw;
-    background-color: gray;
+    background-color: grey;
     padding: 2vh;
     border-radius: 15px;
+    grid-template-areas: "first_name last_name"
+                         "email email"
+                         "username username"
+                         "password password"
+                         "confirm_password confirm_password"
+                         "terms terms"
+                         "RegisterButton RegisterButton"
+                         "AlreadyAccount AlreadyAccount"
 }
 
-input[type = text], input[type = password], input[type = email]{
+
+#RegistrateForm #firstname {
+    grid-area: firstname;
     margin: 1vh 0;
-    padding: 0.5rem;
+}
+
+#RegistrateForm #lastname {
+    grid-area: lastname;
+    margin: 1vh 0;
+}
+
+#RegistrateForm #email {
+    grid-area: email;
+}
+
+#RegistrateForm #username {
+    grid-area: username;
+}
+
+#RegistrateForm #password {
+    grid-area: password;
+}
+
+#RegistrateForm #confirm_password {
+    grid-area: confirm_password;
+}
+
+#RegistrateForm #terms {
+    grid-area: terms;
+    align-self: center;
+    justify-self: center;
+}
+
+#RegistrateForm #RegisterButton {
+    grid-area: RegisterButton;
+    justify-self: center;
+    size: 50px;
+}
+
+#RegistrateForm #AlreadyAccount {
+    grid-area: AlreadyAccount;
+    justify-self: center;
+    margin-top: 1vh;
+}
+
+#LoginForm{
+     height: 100%;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px 10px;
+    margin-bottom: 2vh;
+    background-color: grey;
+    padding: 2vh;
+    border-radius: 15px;
+    grid-template-areas: "username username"
+                         "password password"
+                         "LoginButton LoginButton"
+                         "toRegisterText toRegisterText"
+                         "toRegister_btn toRegister_btn"
+}
+
+#LoginForm #username {
+    grid-area: username;
+}
+
+#LoginForm #password {
+    grid-area: password;
+}
+
+#LoginForm #LoginButton {
+    grid-area: LoginButton;
+    justify-self: center;
+    width: 50%;
+}
+
+#LoginForm #toRegisterText {
+    grid-area: toRegisterText;
+    justify-self: center;
+}
+#toRegister_btn {
+    grid-area: toRegister_btn;
+    justify-self: center;
+}
+
+
+input[type = text], input[type = password], input[type = email]{
+    margin: 0;
+    padding: 0.7rem;
     border-radius: 10px;
     border: 1px solid #ccc;
-    font-size: 10px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form_input{
@@ -178,18 +283,46 @@ input[type = text], input[type = password], input[type = email]{
     box-sizing: border-box;
 }
 
-.RegisterTerms{
+.FormWording{
     color: white;
 }
 
-#RegisterButton, #LoginButton{
-    padding: 1vh;
+
+#RegisterButton{
+    padding: 0.7rem 1rem;
     border-radius: 10px;
     border: none;
     background-color: #64D370;
     color: white;
-    font-size: 1.2vmax;
+    font-size: 16px;
+    width: 100%;
 }
 
+#LoginButton{
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: #64D370;
+    color: white;
+    font-size: 16px;
+    width: 25%;
+}
 
+#toRegister_btn{
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+}
 
+.hidden{
+    display: none;
+    opacity: 0;
+}
+
+.visible{
+    opacity: 1;
+    pointer-events: auto;
+}
