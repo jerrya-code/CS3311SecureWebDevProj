@@ -28,4 +28,13 @@ random_btn.addEventListener("click", function(){
     changeImage_sect.style.display = "flex";
 })
 
+// ------------------- Login/Register Form Toggle ------------------ //
+function toggleForms() {
+  const loginForm = document.getElementById("LoginForm");
+  const registerForm = document.getElementById("RegistrateForm");
+
+  loginForm.classList.toggle("hidden");
+  registerForm.classList.toggle("hidden");
+
+}
 
