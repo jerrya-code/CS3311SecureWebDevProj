@@ -6,6 +6,8 @@ from .models import FoodCard
 from .forms import FoodCardForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 def main(request):
     return render(request, 'index.html')
@@ -51,10 +53,23 @@ def login_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main')
-    else:
-        form = UserCreationForm()
-    return render(request, 'index.html', {'form': form})
+        username = request.POST['username_r']
+        password = request.POST['password_r']
+        email = request.POST['email']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        confirmed_password = request.POST['confirm_password']
+        if confirmed_password != password: return render(request, 'index.html', {'error': 'Passwords do not match'})
+        if User.objects.filter(username=username).exists(): return render(request, 'index.html', {'error': 'Username already taken'})
+
+        user = User.objects.create(
+            username=username,
+            email=email,
+            password=make_password(password),
+            first_name=first_name,
+            last_name=last_name
+        )
+        request.session['user_id'] = user.id
+        return render(request, 'index.html', {'success': 'Account created successfully!'})
+
+    return render(request, 'index.html')

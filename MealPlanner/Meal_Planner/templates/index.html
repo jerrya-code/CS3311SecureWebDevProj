@@ -74,22 +74,26 @@
       <button id = "newRegister_btn" class="newRegister_btn" type = "button" onClick = "toggleForms()" >Create new account</button>
       </form>
 
-      <!-- <form id = "RegistrateForm" method = "post" action = "Meal_Planner/register/"  class = "form_toggle hidden" > 
-              
+      <form id = "RegistrateForm" method = "post" action = "{% url 'register'%}"  class = "form_toggle hidden" > 
+        {% csrf_token %}
         <span title id = "registerTitle">Create a new account</span>
         <input class = "form_input" type = "text" name = "first_name" id = "first_name" placeholder="Enter Your First Name..."> 
         <input class = "form_input" type = "text" name = "last_name" id = "last_name" placeholder="Enter Your Last Name..."> 
         <input class = "form_input" type = "email" name = "email" id = "email" placeholder="Enter Your Email..."> 
-        <input class = "form_input" type = "text" name = "username" id = "username" placeholder="Create a Username..."> 
-        <input class = "form_input" type = "password" name = "password" id = "password" placeholder="Create a Password..."> 
+        <input class = "form_input" type = "text" name = "username_r" id = "username" placeholder="Create a Username..."> 
+        <input class = "form_input" type = "password" name = "password_r" id = "password" placeholder="Create a Password..."> 
         <input class = "form_input" type = "password" name = "confirm_password" id = "confirm_password" placeholder="Confirm Your Password..."> 
         <span class = "FormWording" id = "terms">By clicking Register, you agree to our Terms and Conditions. </span>
 
-        {% csrf_token %}
-        {{ registration_form.as_p }}
          <button class = "form_submit" id = "RegisterButton"  type = "submit" form = "RegistrateForm">Register</button> 
-        <a href="#" id = "AlreadyAccount" class = "FormWording" type = "button" onClick = "toggleForms(); return false;">Already have an account?</a>
-      </form> -->
+        <a href="#" id = "AlreadyAccount" class = "FormWording" type = "button" onClick = "toggleForms(); return false;">Already have an account?</a>        
+        {% if error %}
+        <p style="color:red;">{{ error }}</p> 
+        {% endif %}
+        {% if success %}
+        <p style="color:green;">{{ success }}</p>
+        {% endif %}
+      </form>
 
       
       </div>
