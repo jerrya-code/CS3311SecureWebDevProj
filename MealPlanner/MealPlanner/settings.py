@@ -70,6 +70,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MealPlanner.wsgi.application'
 
+# Redirects for login/logout
+LOGIN_URL = 'login'               # URL name for the login page
+LOGIN_REDIRECT_URL = 'home'       # Where to go after a successful login
+LOGOUT_REDIRECT_URL = 'login'     # Where to go after logging out
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
