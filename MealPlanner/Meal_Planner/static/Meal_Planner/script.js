@@ -29,25 +29,12 @@ random_btn.addEventListener("click", function(){
 })
 
 // ------------------- Login/Register Form Toggle ------------------ //
-document.addEventListener("DOMContentLoaded", function() {
-  const hideLoginForm = document.getElementById("toRegister_btn");
+function toggleForms() {
   const loginForm = document.getElementById("LoginForm");
-  const registerForm = document.getElementById("RegistrateForm"); // fixed ID
-  const hideRegisterForm = document.getElementById("AlreadyAccount");
+  const registerForm = document.getElementById("RegistrateForm");
 
-  if (hideLoginForm && loginForm && registerForm) {
-    hideLoginForm.addEventListener("click", function(e) {
-      e.preventDefault();                // don’t submit LoginForm
-      loginForm.style.display = "none";
-      registerForm.style.display = "block"; //This is messing up the CSS layout (overridden)
-    });
-  }
+  loginForm.classList.toggle("hidden");
+  registerForm.classList.toggle("hidden");
 
-  if (hideRegisterForm && loginForm && registerForm) {
-    hideRegisterForm.addEventListener("click", function(e) {
-      e.preventDefault();                // don’t navigate to "#"
-      registerForm.style.display = "none";
-      loginForm.style.display = "block";
-    });
-  }
-});
+}
+

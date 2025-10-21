@@ -146,48 +146,71 @@ button{
 }
 
 #FormSection{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    /*flex-direction: column;*/
     width: 100%;
     padding: 5vh 0;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     background-color: rgb(0, 0, 0, 0.7);
     margin-top: 38vh;
     box-sizing: border-box;
 }
 
-#RegistrateForm {
+.form_container{
     height: 100%;
-    position: relative;
+    /*position: relative;*/
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
     margin-bottom: 2vh;
     background-color: grey;
     padding: 2vh;
     border-radius: 15px;
-    grid-template-areas: "first_name last_name"
+    justify-content: center;
+    align-items: start;
+    box-sizing: border-box;
+    min-height: 400px;
+    min-width: 550px; /* So the box doesn't shrink from login form */
+    box-shadow: 1px 1px 25px black;
+}
+
+.form_container form{
+    grid-area: 1/1;
+}
+
+.form_container #RegistrateForm:not(.hidden) {
+    display: grid;
+    gap: 16px 12px;
+    padding: 10px; /* Separate from content and edges */
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:"registerTitle registerTitle"
+                        "first_name last_name"
                          "email email"
                          "username username"
                          "password password"
                          "confirm_password confirm_password"
                          "terms terms"
                          "RegisterButton RegisterButton"
-                         "AlreadyAccount AlreadyAccount"
+                         "AlreadyAccount AlreadyAccount";
+    grid-area: 1/1;
 }
 
+#RegistrateForm #registerTitle {
+    grid-area: registerTitle;
+    justify-self: center;
+    font-size: 24px; /* 1.5vmax */
+    margin-bottom: 5vh;
+    color: white;
+    font-weight: bold;
+}
 
-#RegistrateForm #firstname {
-    grid-area: firstname;
+#RegistrateForm #first_name {
+    grid-area: first_name;
     margin: 1vh 0;
 }
 
-#RegistrateForm #lastname {
-    grid-area: lastname;
+#RegistrateForm #last_name {
+    grid-area: last_name;
     margin: 1vh 0;
 }
 
@@ -205,6 +228,7 @@ button{
 
 #RegistrateForm #confirm_password {
     grid-area: confirm_password;
+    margin-bottom: 3vh;
 }
 
 #RegistrateForm #terms {
@@ -217,6 +241,7 @@ button{
     grid-area: RegisterButton;
     justify-self: center;
     size: 50px;
+    font-weight: bold;
 }
 
 #RegistrateForm #AlreadyAccount {
@@ -225,23 +250,30 @@ button{
     margin-top: 1vh;
 }
 
-#LoginForm{
-     height: 100%;
-    position: relative;
-    width: 100%;
-    max-width: 600px;
+.form_container #LoginForm:not(.hidden) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px 10px;
-    margin-bottom: 2vh;
-    background-color: grey;
-    padding: 2vh;
-    border-radius: 15px;
-    grid-template-areas: "username username"
+    gap: 16px 12px;
+    padding: 2.5vh; /* Separate from content and edges */
+    justify-content: stretch;
+    align-items: start;
+    grid-template-areas:"loginTitle loginTitle"
+                        "username username"
                          "password password"
                          "LoginButton LoginButton"
-                         "toRegisterText toRegisterText"
-                         "toRegister_btn toRegister_btn"
+                         "newRegisterText newRegisterText"
+                         "newRegister_btn newRegister_btn"; 
+
+    grid-area: 1/1;
+}
+
+#LoginForm #loginTitle {
+    grid-area: loginTitle;
+    justify-self: center;
+    font-size: 24px; /* 1.5vmax */
+    margin-bottom: 5vh;
+    color: white;
+    font-weight: bold;
 }
 
 #LoginForm #username {
@@ -255,16 +287,19 @@ button{
 #LoginForm #LoginButton {
     grid-area: LoginButton;
     justify-self: center;
-    width: 50%;
+    width: 100%;
+    font-weight: bold;
 }
 
-#LoginForm #toRegisterText {
-    grid-area: toRegisterText;
+#LoginForm #newRegisterText {
+    margin-top: 10vh;
+    grid-area: newRegisterText;
     justify-self: center;
 }
-#toRegister_btn {
-    grid-area: toRegister_btn;
+#newRegister_btn {
+    grid-area: newRegister_btn;
     justify-self: center;
+    width: auto;
 }
 
 
@@ -288,14 +323,15 @@ input[type = text], input[type = password], input[type = email]{
 }
 
 
-#RegisterButton{
+#RegisterButton{ /* Register button to confirm/submit registration form */
     padding: 0.7rem 1rem;
     border-radius: 10px;
     border: none;
     background-color: #64D370;
     color: white;
     font-size: 16px;
-    width: 100%;
+    justify-self: center;
+    width: 75%;
 }
 
 #LoginButton{
@@ -308,7 +344,7 @@ input[type = text], input[type = password], input[type = email]{
     width: 25%;
 }
 
-#toRegister_btn{
+#newRegister_btn{ /* Button to switch to registration form from login form */
     padding: 0.7rem 1rem;
     border-radius: 10px;
     border: none;
@@ -318,8 +354,9 @@ input[type = text], input[type = password], input[type = email]{
 }
 
 .hidden{
-    display: none;
+    display: none !important;
     opacity: 0;
+    pointer-events: none;
 }
 
 .visible{
