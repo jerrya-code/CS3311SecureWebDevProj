@@ -1,10 +1,11 @@
+#from pyexpat.errors import messages
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import FoodCard
 from .forms import FoodCardForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from django.contrib.auth import authenticate, login
 
 def main(request):
     return render(request, 'index.html')
@@ -38,13 +39,15 @@ def edit_card(request, category, primary_key):
 
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            # Perform login
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
             return redirect('main')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'index.html', {'form': form}) 
+        else:
+            messages.error(request, "Invalid credentials")
+    return render(request, 'index.html') 
 
 def register_view(request):
     if request.method == 'POST':
