@@ -1,11 +1,10 @@
-#from pyexpat.errors import messages
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import FoodCard
 from .forms import FoodCardForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 import logging
@@ -64,8 +63,12 @@ def register_view(request):
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         confirmed_password = request.POST['confirm_password']
-        if confirmed_password != password: return render(request, 'index.html', {'error': 'Passwords do not match'})
-        if User.objects.filter(username=username).exists(): return render(request, 'index.html', {'error': 'Username already taken'})
+        if confirmed_password != password: 
+            messages.error(request, "Passwords do not match")
+            return redirect('/#RegistrateForm')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already taken") 
+            return redirect('/#RegistrateForm')
 
         user = User.objects.create(
             username=username,
@@ -75,7 +78,11 @@ def register_view(request):
             last_name=last_name
         )
         request.session['user_id'] = user.id
-        login(request, user)  # auto-login after registration
-        return redirect('main')
+        messages.success(request, "Registration successful!")
+        return redirect('index.html')
 
     return render(request, 'index.html')
+
+def logout_view(request):
+    logout(request)  
+    return redirect('login')  
