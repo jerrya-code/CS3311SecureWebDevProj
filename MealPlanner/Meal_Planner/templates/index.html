@@ -67,8 +67,13 @@
         {% endif %}
         <input type = "text" name = "username" id = "username" placeholder="Enter Your Username...">
         <input type = "password" name = "password" id = "password" placeholder="Enter Your Password...">
-        {{ request.user.is_superuser }}
+        <!--{{ request.user.is_superuser }} -->
         <!-- {{ login_form.as_p }} -->
+          {% if request.user.is_authenticated %}
+          <p>Logged in as: {{ request.user.username }} (superuser: {{ request.user.is_superuser }})</p>
+          {% else %}
+          <p>Not logged in</p>
+            {% endif %}
       <button class = "form_submit" id = "LoginButton"  type = "submit">Log In</button> 
       <span class = "FormWording" id = "newRegisterText">Don't have an account? Register here</span>
       <button id = "newRegister_btn" class="newRegister_btn" type = "button" onClick = "toggleForms()" >Create new account</button>

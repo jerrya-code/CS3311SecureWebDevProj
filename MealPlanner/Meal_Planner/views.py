@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+import logging
+logger = logging.getLogger(__name__)
 
 def main(request):
     return render(request, 'index.html')
@@ -40,14 +42,17 @@ def edit_card(request, category, primary_key):
 
 
 def login_view(request):
+    logger.warning("login_view called: method=%s, path=%s", request.method, request.path)
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            logger.warning("authenticate succeeded for %r", username)
             return redirect('main')
         else:
+            logger.warning("authenticate FAILED for %r", username)
             messages.error(request, "Invalid credentials")
     return render(request, 'index.html') 
 
@@ -70,6 +75,7 @@ def register_view(request):
             last_name=last_name
         )
         request.session['user_id'] = user.id
-        return render(request, 'index.html', {'success': 'Account created successfully!'})
+        login(request, user)  # auto-login after registration
+        return redirect('main')
 
     return render(request, 'index.html')
