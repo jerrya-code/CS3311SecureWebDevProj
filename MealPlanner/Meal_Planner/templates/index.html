@@ -29,7 +29,12 @@
         <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
       </nav>
       <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a>
-      <a href="#" class="shadow hyper" id="login">Log In</a>    </header>
+          {% if request.user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="shadow hyper" id="login"> Log Out </a>
+          {% else %}
+          <a href="{% url 'main' %}#FormSection" class="shadow hyper" id="login"> Log In </a>
+          {% endif%}    
+      </header>
     <section>
       <h1 id="webapp_dscrpt">
         Meal Planner <span id="green_text">helps you track</span> calories and macros for smarter eating.
@@ -52,7 +57,6 @@
 
 
     <div id = "FormSection" class = "FormSection">
-
       <div class = "form_container">
       
       <form id = "LoginForm" method = "post" action = "{% url 'login' %}" class = "form_toggle "> <!-- Default visible form --> <!--Meal_Planner == Users-->
@@ -67,8 +71,7 @@
         {% endif %}
         <input type = "text" name = "username" id = "username" placeholder="Enter Your Username...">
         <input type = "password" name = "password" id = "password" placeholder="Enter Your Password...">
-        {{ request.user.is_superuser }}
-        <!-- {{ login_form.as_p }} -->
+        {{ request.user.is_superuser }}{{request.user.username }}
       <button class = "form_submit" id = "LoginButton"  type = "submit">Log In</button> 
       <span class = "FormWording" id = "newRegisterText">Don't have an account? Register here</span>
       <button id = "newRegister_btn" class="newRegister_btn" type = "button" onClick = "toggleForms()" >Create new account</button>
@@ -87,12 +90,6 @@
 
          <button class = "form_submit" id = "RegisterButton"  type = "submit" form = "RegistrateForm">Register</button> 
         <a href="#" id = "AlreadyAccount" class = "FormWording" type = "button" onClick = "toggleForms(); return false;">Already have an account?</a>        
-        {% if error %}
-        <p style="color:red;">{{ error }}</p> 
-        {% endif %}
-        {% if success %}
-        <p style="color:green;">{{ success }}</p>
-        {% endif %}
       </form>
 
       
