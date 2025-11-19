@@ -35,6 +35,4 @@ function toggleForms() {
 
   loginForm.classList.toggle("hidden");
   registerForm.classList.toggle("hidden");
-
 }
-

@@ -43,8 +43,8 @@ def edit_card(request, category, primary_key):
 def login_view(request):
     logger.warning("login_view called: method=%s, path=%s", request.method, request.path)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -53,22 +53,25 @@ def login_view(request):
         else:
             logger.warning("authenticate FAILED for %r", username)
             messages.error(request, "Invalid credentials")
-    return render(request, 'index.html') 
+            return render(request, 'index.html', {'show_register': False})
+    return render(request, 'index.html', {'show_register': False}) 
 
 def register_view(request):
     if request.method == 'POST':
-        username = request.POST['username_r']
-        password = request.POST['password_r']
-        email = request.POST['email']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        confirmed_password = request.POST['confirm_password']
+        username = request.POST.get('username_r', '').strip()
+        password = request.POST.get('password_r', '')
+        email = request.POST.get('email', '').strip()
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        confirmed_password = request.POST.get('confirm_password', '')
+
         if confirmed_password != password: 
             messages.error(request, "Passwords do not match")
-            return redirect('/#RegistrateForm')
+            return render(request, 'index.html', {'show_register': True})
+        
         if User.objects.filter(username=username).exists():
             messages.error(request, "Username already taken") 
-            return redirect('/#RegistrateForm')
+            return render(request, 'index.html', {'show_register': True})
 
         user = User.objects.create(
             username=username,
@@ -77,12 +80,13 @@ def register_view(request):
             first_name=first_name,
             last_name=last_name
         )
-        request.session['user_id'] = user.id
+        login(request, user)
         messages.success(request, "Registration successful!")
-        return redirect('index.html')
+        return redirect('main')
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'show_register': True})
 
 def logout_view(request):
     logout(request)  
-    return redirect('login')  
+    messages.success(request, "You have been logged out.")
+    return redirect('main')  

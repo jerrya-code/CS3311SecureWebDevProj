@@ -58,10 +58,7 @@
 
     <div id = "FormSection" class = "FormSection">
       <div class = "form_container">
-      
-      <form id = "LoginForm" method = "post" action = "{% url 'login' %}" class = "form_toggle "> <!-- Default visible form --> <!--Meal_Planner == Users-->
-        {% csrf_token %}
-        <span title id = "loginTitle">Log into Meal Planner</span>
+
         {% if messages %}
         <ul class="messages">
         {% for message in messages %}
@@ -69,6 +66,11 @@
         {% endfor %}
         </ul>
         {% endif %}
+      
+      <form id = "LoginForm" method = "post" action = "{% url 'login' %}" class = "form_toggle {% if show_register %}hidden{% endif %}"> <!-- Default visible form --> <!--Meal_Planner == Users-->
+        {% csrf_token %}
+        <span title id = "loginTitle">Log into Meal Planner</span>
+
         <input type = "text" name = "username" id = "username" placeholder="Enter Your Username...">
         <input type = "password" name = "password" id = "password" placeholder="Enter Your Password...">
         {{ request.user.is_superuser }}{{request.user.username }}
@@ -77,14 +79,14 @@
       <button id = "newRegister_btn" class="newRegister_btn" type = "button" onClick = "toggleForms()" >Create new account</button>
       </form>
 
-      <form id = "RegistrateForm" method = "post" action = "{% url 'register'%}"  class = "form_toggle hidden" > 
+      <form id = "RegistrateForm" method = "post" action = "{% url 'register'%}"  class = "form_toggle {% if not show_register %}hidden{% endif %}" > 
         {% csrf_token %}
         <span title id = "registerTitle">Create a new account</span>
         <input class = "form_input" type = "text" name = "first_name" id = "first_name" placeholder="Enter Your First Name..."> 
         <input class = "form_input" type = "text" name = "last_name" id = "last_name" placeholder="Enter Your Last Name..."> 
         <input class = "form_input" type = "email" name = "email" id = "email" placeholder="Enter Your Email..."> 
-        <input class = "form_input" type = "text" name = "username_r" id = "username" placeholder="Create a Username..."> 
-        <input class = "form_input" type = "password" name = "password_r" id = "password" placeholder="Create a Password..."> 
+        <input class = "form_input" type = "text" name = "username_r" id = "username_r" placeholder="Create a Username..."> 
+        <input class = "form_input" type = "password" name = "password_r" id = "password_r" placeholder="Create a Password..."> 
         <input class = "form_input" type = "password" name = "confirm_password" id = "confirm_password" placeholder="Confirm Your Password..."> 
         <span class = "FormWording" id = "terms">By clicking Register, you agree to our Terms and Conditions. </span>
 
