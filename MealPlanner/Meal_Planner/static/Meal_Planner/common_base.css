@@ -110,3 +110,13 @@ p{
     background-color: #64D370;
     color: white;
 }
+button{
+    width: 50px;
+    font-size: 3rem;
+}
+.card:hover{
+    scale: 1.2;
+    transition-timing-function: ease;
+    transition-duration: 0.4s;
+    background-color: white; 
+}

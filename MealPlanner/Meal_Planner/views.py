@@ -86,3 +86,11 @@ def register_view(request):
 def logout_view(request):
     logout(request)  
     return redirect('login')  
+
+def add_card(request, category):
+    form = FoodCardForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+        return redirect('category', category=category)
+    messages.error(request, "Populate all fields")
+    return render(request, 'add_card.html', {'form': form, 'category': category})

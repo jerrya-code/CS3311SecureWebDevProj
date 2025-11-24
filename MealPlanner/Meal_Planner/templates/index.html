@@ -62,16 +62,17 @@
       <form id = "LoginForm" method = "post" action = "{% url 'login' %}" class = "form_toggle "> <!-- Default visible form --> <!--Meal_Planner == Users-->
         {% csrf_token %}
         <span title id = "loginTitle">Log into Meal Planner</span>
-        {% if messages %}
+        {% comment %} {% if messages %}
         <ul class="messages">
         {% for message in messages %}
         <li class="{{ message.tags }}">{{ message }}</li>
         {% endfor %}
         </ul>
-        {% endif %}
+        {% endif %} {% endcomment %}
         <input type = "text" name = "username" id = "username" placeholder="Enter Your Username...">
         <input type = "password" name = "password" id = "password" placeholder="Enter Your Password...">
-        {{ request.user.is_superuser }}{{request.user.username }}
+        <p> The username of the signed in user: {{request.user.username }} </p><br>
+        <p> Is the signed in user a superuser? {{ request.user.is_superuser }} </p>
       <button class = "form_submit" id = "LoginButton"  type = "submit">Log In</button> 
       <span class = "FormWording" id = "newRegisterText">Don't have an account? Register here</span>
       <button id = "newRegister_btn" class="newRegister_btn" type = "button" onClick = "toggleForms()" >Create new account</button>

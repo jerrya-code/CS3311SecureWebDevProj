@@ -59,7 +59,7 @@
       {% endfor %}
       {% if user.is_superuser %}
       <div class="card shadow">
-        <button>+</button>
+        <a href="{% url 'add_card' category=category%}"><button>+</button></a>
       </div>
       {% endif %}
     </main>
