@@ -88,6 +88,7 @@ main{
     flex-wrap: wrap;
     row-gap: 3vh;
 }
+
 .card{
     display: flex;
     flex-direction: column;
@@ -96,6 +97,7 @@ main{
     align-items: center;
     width: 28vw;
 }
+
 img, .card{
     border-radius: 5%;
 }

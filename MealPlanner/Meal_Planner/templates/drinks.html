@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
     <link rel="stylesheet" type="text/css" href="{% static 'Meal_Planner/common_base.css' %}"/>
+     <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon">
   </head>
   <body>
     <header>
@@ -43,8 +44,8 @@
         <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
         {% endif %}
         <h2>{{ item.title }}</h2>
-        <p>{{ item.description }}</p>
-        <p>Proteins: {{ item.proteins }}g</p>
+        <p>{{ item.description }}</p><br> 
+        <bold><p>Proteins: {{ item.proteins }}g</p></bold>
         <p>Fats: {{ item.fats }}g</p>
         <p>Carbohydrates: {{ item.carbohydrates }}g</p>
         <button class="order_btn">Select</button>
