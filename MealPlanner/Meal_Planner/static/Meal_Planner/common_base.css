@@ -11,6 +11,7 @@
 }
 body{
     overflow-x: hidden;
+    /*background-color: black;*/
 }
 
 #webapp_name{
@@ -55,7 +56,7 @@ nav{
 }
 .hyper{
     display: inline-flex;
-    background-color: white;
+    background-color: white; 
     border-radius: 50px;
     position: relative;
     top: -2vh;
@@ -89,10 +90,11 @@ main{
     row-gap: 3vh;
 }
 
-.card{
+.card {
+    background-color: white;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     justify-content: center;
     align-items: center;
     width: 28vw;
@@ -101,9 +103,24 @@ main{
 img, .card{
     border-radius: 5%;
 }
-p{
+
+.item_title {
+    padding: 2%;
+    text-align: center;
+    color: red;
+}
+
+.item_desc {
+    padding: 2%;
+    text-align: center;
+    color: blue;
+    margin-bottom: 5%;
+}
+
+p, .card{
     margin-bottom: 1%;
 }
+
 .order_btn{
     border-radius: 50px;
     width: 25%;
@@ -111,6 +128,8 @@ p{
     border: none;
     background-color: #64D370;
     color: white;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 button{
     width: 50px;

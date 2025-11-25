@@ -42,9 +42,12 @@
       <button class="meal_btn shadow" id="create_own">Create</button>
       <button class="meal_btn shadow" id="random">Random</button>
     </section>
+
+
     <div id="big_bgcircle" class="shadow">
       <img src="{% static 'Meal_Planner/imgs/main_startPhoto.jpg' %}" alt="" id="dish_photo">
     </div>
+
     <div id="changePic_btns">
       <button id="previous" class="changeImg_btn"><</button>
       <span class="circle" id="circle1"></span>
@@ -52,8 +55,42 @@
       <span class="circle" id="circle3"></span>
       <span class="circle" id="circle4"></span>
       <span class="circle" id="circle5"></span>
+
       <button id="next" class="changeImg_btn">></button>
     </div> <br><br>
+
+    <main>
+      {% for item in items %}
+      {% if item.category == category%}
+      <div class="card shadow">
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
+        {% endif %}
+        
+        <div class = "card_content" >
+          <h2 class="item_title"> {{ item.title }}</h2>
+          <p class = "item_desc">{{ item.description }}</p>
+
+          <div class = "nutrient_info">
+            <p><strong>Proteins: </strong> {{ item.proteins }}g</p>
+            <p><strong>Fats: </strong> {{ item.fats }}g</p>
+            <p><strong>Carbohydrates: </strong> {{ item.carbohydrates }}g</p>
+          </div>
+        </div>
+        
+        <button class="order_btn">Select</button>
+
+        
+        {% if request.user.is_superuser %}
+        <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
+        <a href="{% url 'edit_card' category=item.category primary_key=item.pk %}" >Edit</a>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% empty %}
+      <p>No items found for this category.</p>
+      {% endfor %}
+    </main>
 
 
     <div id = "FormSection" class = "FormSection">
