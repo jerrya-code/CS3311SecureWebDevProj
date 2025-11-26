@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
     <link rel="stylesheet" type="text/css" href="{% static 'Meal_Planner/common_base.css' %}"/>
+     <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon">
   </head>
   <body>
     <header>
@@ -53,11 +54,19 @@
         {% if item.image %}
         <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
         {% endif %}
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.description }}</p>
-        <p>Proteins: {{ item.proteins }}g</p>
-        <p>Fats: {{ item.fats }}g</p>
-        <p>Carbohydrates: {{ item.carbohydrates }}g</p>
+        
+        <div class = "card_content" >
+          <h2 class="item_title"> {{ item.title }}</h2>
+          <p class = "item_desc">{{ item.description }}</p>
+
+          <div class = "nutrient_info">
+            <p><strong>Proteins: </strong> {{ item.proteins }}g</p>
+            <p><strong>Fats: </strong> {{ item.fats }}g</p>
+            <p><strong>Carbohydrates: </strong> {{ item.carbohydrates }}g</p>
+          </div>
+        </div>
+
+
         <button class="order_btn">Select</button>
         {% if request.user.is_superuser %}
         <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
