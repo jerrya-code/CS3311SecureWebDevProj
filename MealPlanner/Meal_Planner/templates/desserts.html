@@ -32,14 +32,24 @@
         <a href="{% url 'logout' %}" class="shadow hyper" id="login"> Log Out </a>
       {% else %}
         <a href="{% url 'main' %}#FormSection" class="shadow hyper" id="login"> Log In </a>
-      {% endif%}      
+      {% endif%}
+    <select class="shadow hyper" id="filter">
+      <option>Regular</option>
+      <option>Gluten Free</option>
+      <option>Dairy Free</option>
+      <option>Nut Free</option>
+      <option>Vegetarian</option>
+    </select>      
     </header>
     
     <main>
       {% for item in items %}
       {% if item.category == category%}
-      <div class="card shadow">
-        {% if item.image %}
+        <div class="card shadow" 
+           data-gluten="{{ item.gluten_free }}"
+           data-dairy="{{ item.dairy_free }}"
+           data-nut="{{ item.nut_free }}"
+           data-vegetarian="{{ item.vegetarian }}">        {% if item.image %}
         <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
         {% endif %}
         <h2>{{ item.title }}</h2>
@@ -64,6 +74,6 @@
       </div>
       {% endif %}
     </main>
-    <script src="{% static 'Meal_Planner/drinks.js' %}"></script>
+    <script src="{% static 'Meal_Planner/filter.js' %}"></script>
   </body>
 </html>

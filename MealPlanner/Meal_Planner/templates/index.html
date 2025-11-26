@@ -39,7 +39,7 @@
       <h1 id="webapp_dscrpt">
         Meal Planner <span id="green_text">helps you track</span> calories and macros for smarter eating.
       </h1>
-      <button class="meal_btn shadow" id="create_own">Create</button>
+      <a href="{% url 'category' 'entries'%}"><button class="meal_btn shadow" id="create_own">Create</button></a>
       <button class="meal_btn shadow" id="random">Random</button>
     </section>
     <div id="big_bgcircle" class="shadow">
@@ -59,25 +59,19 @@
     <div id = "FormSection" class = "FormSection">
       <div class = "form_container">
       
-      <form id = "LoginForm" method = "post" action = "{% url 'login' %}" class = "form_toggle "> <!-- Default visible form --> <!--Meal_Planner == Users-->
+      <form id = "LoginForm" method = "post" action = "{% url 'login' %}" class = "{% if show_register %}hidden{% endif %} "> <!-- Default visible form -->
         {% csrf_token %}
         <span title id = "loginTitle">Log into Meal Planner</span>
-        {% comment %} {% if messages %}
-        <ul class="messages">
-        {% for message in messages %}
-        <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-        {% endif %} {% endcomment %}
+
         <input type = "text" name = "username" id = "username" placeholder="Enter Your Username...">
         <input type = "password" name = "password" id = "password" placeholder="Enter Your Password...">
-        <p> The username of the signed in user: {{request.user.username }} </p><br>
-        <p> Is the signed in user a superuser? {{ request.user.is_superuser }} </p>
       <button class = "form_submit" id = "LoginButton"  type = "submit">Log In</button> 
       <span class = "FormWording" id = "newRegisterText">Don't have an account? Register here</span>
       <button id = "newRegister_btn" class="newRegister_btn" type = "button" onClick = "toggleForms()" >Create new account</button>
       </form>
-
+        {% for message in messages %}
+            <p id="{{message.tags}}" class="message">{{ message }}</p>
+        {% endfor %}
       <form id = "RegistrateForm" method = "post" action = "{% url 'register'%}"  class = "form_toggle {% if not show_register %}hidden{% endif %}" > 
         {% csrf_token %}
         <span title id = "registerTitle">Create a new account</span>
@@ -88,12 +82,9 @@
         <input class = "form_input" type = "password" name = "password_r" id = "password_r" placeholder="Create a Password..."> 
         <input class = "form_input" type = "password" name = "confirm_password" id = "confirm_password" placeholder="Confirm Your Password..."> 
         <span class = "FormWording" id = "terms">By clicking Register, you agree to our Terms and Conditions. </span>
-
-         <button class = "form_submit" id = "RegisterButton"  type = "submit" form = "RegistrateForm">Register</button> 
+        <button class = "form_submit" id = "RegisterButton"  type = "submit" form = "RegistrateForm">Register</button> 
         <a href="#" id = "AlreadyAccount" class = "FormWording" type = "button" onClick = "toggleForms(); return false;">Already have an account?</a>        
       </form>
-
-      
       </div>
     </div>
 

@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import FoodCard
 from .forms import FoodCardForm
@@ -8,10 +9,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 import logging
+
 logger = logging.getLogger(__name__)
 
 def main(request):
-    return render(request, 'index.html')
+    status = request.GET.get("status")  
+    username = request.GET.get("user")
+    return render(request, 'index.html', {"status":status, "username":username})
 
 def category_view(request, category):
     items = FoodCard.objects.filter(category=category)
@@ -49,6 +53,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             logger.warning("authenticate succeeded for %r", username)
+            messages.success(request, "User was authenticated successfully")
             return redirect('main')
         else:
             logger.warning("authenticate FAILED for %r", username)
@@ -73,16 +78,20 @@ def register_view(request):
             messages.error(request, "Username already taken") 
             return render(request, 'index.html', {'show_register': True})
 
-        user = User.objects.create(
-            username=username,
-            email=email,
-            password=make_password(password),
-            first_name=first_name,
-            last_name=last_name
-        )
-        login(request, user)
-        messages.success(request, "Registration successful!")
-        return redirect('main')
+        if username!='' and password!='' and email!='' and first_name!='' and last_name!='' \
+            and confirmed_password!='':
+            user = User.objects.create(
+                username=username,
+                email=email,
+                password=make_password(password),
+                first_name=first_name,
+                last_name=last_name
+            )
+            login(request, user)
+            messages.success(request, "Registration successful!")
+            return redirect('main')
+        else:
+            messages.error(request, "Fill out all registration fields!")
 
     return render(request, 'index.html', {'show_register': True})
 
@@ -92,9 +101,16 @@ def logout_view(request):
     return redirect('main')  
 
 def add_card(request, category):
-    form = FoodCardForm(request.POST, request.FILES)
-    if form.is_valid():
-        form.save()
-        return redirect('category', category=category)
-    messages.error(request, "Populate all fields")
+    if request.method == "POST":
+        form = FoodCardForm(request.POST, request.FILES)
+        if form.is_valid():
+            food = form.save(commit=False)   
+            food.category = category
+            food.save()
+            return redirect('category', category=category)
+        else:
+            messages.error(request, "Populate all fields")
+    else:
+        form = FoodCardForm()
     return render(request, 'add_card.html', {'form': form, 'category': category})
+   

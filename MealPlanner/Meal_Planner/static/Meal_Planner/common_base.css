@@ -21,7 +21,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-left: 7vw;
+    margin-left: 2vw;
     position: relative;
     top: -5vh;
     background-color: white;
@@ -59,6 +59,7 @@ nav{
     border-radius: 50px;
     position: relative;
     top: -2vh;
+    left: -3vw;
     justify-content: center;
     align-items: center;
     height: 8vh;
@@ -67,7 +68,7 @@ nav{
     font-weight: 900;
 }
 #login{
-    margin-left: 3vw;
+    margin-left: 1vw;
     width: 7vw;
 }
 
@@ -119,4 +120,11 @@ button{
     transition-timing-function: ease;
     transition-duration: 0.4s;
     background-color: white; 
+}
+#filter{
+    width: 8vw;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+    margin-left: 1vw;
 }

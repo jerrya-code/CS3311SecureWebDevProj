@@ -364,3 +364,21 @@ input[type = text], input[type = password], input[type = email]{
     opacity: 1;
     pointer-events: auto;
 }
+.message{
+    padding: 1rem 1rem;
+    position: absolute;
+    top: 5vh;
+    width: 50vw;
+    text-align: center;
+    border-radius: 50px;
+    opacity: 0.8;
+    z-index: 3;
+}
+#error{
+    border: solid red 0.1rem;
+    background-color: lightcoral;
+}
+#success{
+    border: solid green 0.1rem;
+    background-color: lightgreen;
+}
