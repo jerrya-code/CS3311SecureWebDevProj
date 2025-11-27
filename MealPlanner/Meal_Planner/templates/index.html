@@ -60,36 +60,24 @@
     </div> <br><br>
 
     <main>
-      {% for item in items %}
-      {% if item.category == category%}
       <div class="card shadow">
-        {% if item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
-        {% endif %}
+        
+        <img src="MealPlanner\media\foodCard_images\40ff98ca949efc6f26cbc0233c78e87fce3eabaa_LA3s04q.jpg" alt="Food_cardTest" width="80%" height="60%"/>
         
         <div class = "card_content" >
-          <h2 class="item_title"> {{ item.title }}</h2>
-          <p class = "item_desc">{{ item.description }}</p>
+          <h2 class="item_title"> Food Meal</h2>
+          <p class = "item_desc">This is a test</p>
 
           <div class = "nutrient_info">
-            <p><strong>Proteins: </strong> {{ item.proteins }}g</p>
-            <p><strong>Fats: </strong> {{ item.fats }}g</p>
-            <p><strong>Carbohydrates: </strong> {{ item.carbohydrates }}g</p>
+            <p><strong>Proteins: </strong>      50 g</p>
+            <p><strong>Fats: </strong>          20 g</p>
+            <p><strong>Carbohydrates: </strong> 30 g</p>
           </div>
         </div>
         
         <button class="order_btn">Select</button>
 
-        
-        {% if request.user.is_superuser %}
-        <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
-        <a href="{% url 'edit_card' category=item.category primary_key=item.pk %}" >Edit</a>
-        {% endif %}
       </div>
-      {% endif %}
-      {% empty %}
-      <p>No items found for this category.</p>
-      {% endfor %}
     </main>
 
 
