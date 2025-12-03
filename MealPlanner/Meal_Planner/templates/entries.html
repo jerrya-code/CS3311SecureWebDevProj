@@ -67,7 +67,7 @@
         </div>
 
 
-        <button class="order_btn">Select</button>
+        <a class="order_a" href="{% url 'add_cart' category=item.category primary_key=item.pk %}">Select</a>
         {% if request.user.is_superuser %}
         <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
         <a href="{% url 'edit_card' category=item.category primary_key=item.pk %}" >Edit</a>
@@ -84,6 +84,13 @@
       </div>
       {% endif %}
     </main>
+
+    <aside class="cart">
+      <p>Total</p>
+      <p>{{request.session.cart.proteins}}</p>
+      <p>{{request.session.cart.fats}}</p>
+      <p>{{request.session.cart.carbs}}</p>
+    </aside>
     <script src="{% static 'Meal_Planner/filter.js' %}"></script>
   </body>
 </html>
