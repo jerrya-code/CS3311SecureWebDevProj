@@ -4,9 +4,31 @@
     font-family: "Montserrat";
     color: black;
 }
+.overlay_background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 998; /* Below the sidebar which has z-index 999 (above everything except sidebar*/
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.overlay_background.active {
+    visibility: visible;
+    opacity: 1;
+}
+
 body{
     overflow-x: hidden;
+    transition: background-color 0.5s;
 }
+
+
+
 @font-face {
     font-family: "Montserrat";
     src: url("fonts/Montserrat-Regular.ttf") format("truetype");
@@ -65,10 +87,73 @@ nav{
     text-decoration: none;
     font-weight: 900;
 }
-#login{
-    margin-left: 3vw;
-    width: 7vw;
+
+.usernav{
+    display: inline-flex;
+    background-color: white;
+    border-radius: 50px;
+    position: relative;
+    top: -2vh;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 15vw;
+    text-decoration: none;
+    font-weight: 900;
 }
+
+#login{
+    /*margin-left: 3vw;*/
+   /* width: 7vw; */
+   width: auto;
+    padding: 0 10px;
+    font-size: 1rem;
+}
+
+.vertical_divider{
+    border-left: 4px solid black;
+    height: 100%;
+    margin: 0 10px;
+}
+
+#cart_btn{
+    width: auto;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.sidebar{
+    height: 100%; /*full height of webpage*/
+    width: 0; /*initially hidden*/
+    bottom: 0;
+    position: fixed; /*stay in place*/
+    z-index: 999; /*on top*/
+    top: 0;
+    right: 0;
+    background-color: white; /*white background*/
+    overflow-x: hidden; /*disable horizontal scroll*/
+    padding-top: 60px; /*place content 60px from the top*/
+    padding-left: 0.25rem;
+    transition: 0.5s; /*smooth transition for width change*/
+    box-shadow: -10px 0 15px var(--light-gray);
+}
+
+.sidebar #cart_header{
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 2vh;
+}
+
+.sidebar .closebtn{
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
 section{
     width: 35vw;
     margin-left: 15vw;
