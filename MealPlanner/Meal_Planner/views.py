@@ -133,3 +133,12 @@ def add_cart(request, category, primary_key):
     request.session.modified = True
 
     return redirect('category', category=category)
+
+def clear_cart(request):
+    request.session["cart"] = {
+            "items": [],
+            "proteins": 0,
+            "fats": 0,
+            "carbs": 0,
+        }
+    return redirect(request.META.get('HTTP_REFERER') or '/')
