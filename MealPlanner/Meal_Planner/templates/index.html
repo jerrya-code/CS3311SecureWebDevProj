@@ -9,6 +9,63 @@
     <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon"> <!--Was causing error w/o this-->
   </head>
   <body>
+    <div id = "shopping_cart" class = "sidebar">
+
+      <div id ="cart_header">
+
+        <div id = "cart_close_btn">
+          <span class="closebtn" onclick="closeCart()">&times;</span>
+        </div>
+
+        <div id = "cart_title"> 
+          <h3 id="cart_header_title">
+          <span>Your Cart</span>
+        </h3>
+        </div>
+        
+      </div>
+        
+        <div id="cart_items">
+          <p>Your cart is empty.</p>
+        </div>
+
+        <div id ="selected_cards">
+          <div id = "selected_entries">
+          <h3>Selected Entries:</h3>
+        </div>
+
+        <div id = "selected_salads">
+          <h3>Selected Salads:</h3>
+        </div>
+        <div id = "selected_appetizers">
+          <h3>Selected Appetizers:</h3>
+
+        </div>
+        <div id = "selected_desserts">
+          <h3>Selected Desserts:</h3>
+        </div>
+
+        <div id = "selected_drinks">
+          <h3>Selected Drinks:</h3>
+        </div>
+        
+        </div>
+
+        <div id = "cart_nutrients">
+          <h3>Nutritional Info:</h3>
+          <p id="total_proteins"><strong>Total Proteins: </strong> 0 g</p>
+          <p id="total_fats"><strong>Total Fats: </strong> 0 g</p>
+          <p id="total_carbs"><strong>Total Carbohydrates: </strong> 0 g</p>
+        </div>
+        <div id="cart_total">
+          <h3>Total: $0.00</h3>
+        </div>
+        <button id ="savemeal_btn">Save Meal</button>
+        <button id="checkout_btn">Checkout</button>
+      </div>
+
+      <div id = "overlay_background" class = "overlay_background"></div>
+      
       <header>
       <div id="webapp_name" class="shadow" >
         <img
@@ -28,13 +85,25 @@
         <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
         <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
       </nav>
-      <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a>
+      <!-- <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a> -->
           {% if request.user.is_authenticated %}
-          <a href="{% url 'logout' %}" class="shadow hyper" id="login"> Log Out </a>
+          <nav class = "shadow hyper usernav" id ="user_nav">
+          <a href="{% url 'logout' %}" id="login">Log Out </a> 
+          <span class = "vertical_divider"></span>
+
+          <span onclick = "openCart()" id="cart_btn"> 🛒 </span>
+
+          </nav>
+          
           {% else %}
           <a href="{% url 'main' %}#FormSection" class="shadow hyper" id="login"> Log In </a>
-          {% endif%}    
+          {% endif%}   
+          
+          
       </header>
+
+      
+
     <section>
       <h1 id="webapp_dscrpt">
         Meal Planner <span id="green_text">helps you track</span> calories and macros for smarter eating.
@@ -43,8 +112,8 @@
       <button class="meal_btn shadow" id="random">Random</button>
     </section>
 
-
-    <div id="big_bgcircle" class="shadow">
+<main>
+<div id="big_bgcircle" class="shadow">
       <img src="{% static 'Meal_Planner/imgs/main_startPhoto.jpg' %}" alt="" id="dish_photo">
     </div>
 
@@ -59,7 +128,11 @@
       <button id="next" class="changeImg_btn">></button>
     </div> <br><br>
 
-    <main>
+</main>
+
+    
+
+    <!-- <main>
       <div class="card shadow">
         
         <img src="MealPlanner\media\foodCard_images\40ff98ca949efc6f26cbc0233c78e87fce3eabaa_LA3s04q.jpg" alt="Food_cardTest" width="80%" height="60%"/>
@@ -78,7 +151,7 @@
         <button class="order_btn">Select</button>
 
       </div>
-    </main>
+    </main> -->
 
 
     <div id = "FormSection" class = "FormSection">
@@ -119,8 +192,12 @@
       </form>
 
       
+        </div>
+       </div>
+
+        </div>
+
       </div>
-    </div>
 
     <script src="{% static 'Meal_Planner/script.js' %}"></script>
   </body>
