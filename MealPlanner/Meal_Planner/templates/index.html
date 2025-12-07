@@ -24,45 +24,31 @@
         </div>
         
       </div>
-        
-        <div id="cart_items">
-          <p>Your cart is empty.</p>
-        </div>
+        {% if not groupped_items %}
+          <div id="cart_items">
+            <p>Your cart is empty.</p>
+          </div>
+        {% else %}
+{% for category, items in groupped_items.items %}
+    <div id="selected_cards">
+        <div id="selected_{{ category }}">
+            <h3>Selected {{ category }}:</h3>
 
-        <div id ="selected_cards">
-          <div id = "selected_entries">
-          <h3>Selected Entries:</h3>
+            {% for title, quantity in items.items %}
+                <h2>{{ title }} X {{ quantity }}</h2>
+            {% endfor %}
         </div>
-
-        <div id = "selected_salads">
-          <h3>Selected Salads:</h3>
-        </div>
-        <div id = "selected_appetizers">
-          <h3>Selected Appetizers:</h3>
-
-        </div>
-        <div id = "selected_desserts">
-          <h3>Selected Desserts:</h3>
-        </div>
-
-        <div id = "selected_drinks">
-          <h3>Selected Drinks:</h3>
-        </div>
-        
-        </div>
-
+    </div>
+{% endfor %}
         <div id = "cart_nutrients">
           <h3>Nutritional Info:</h3>
-          <p id="total_proteins"><strong>Total Proteins: </strong> {{request.session.cart.proteins}} g</p>
-          <p id="total_fats"><strong>Total Fats: </strong> {{request.session.cart.fats}} g</p>
-          <p id="total_carbs"><strong>Total Carbohydrates: </strong> {{request.session.cart.carbs}} g</p>
-        </div>
-        <div id="cart_total">
-          <h3>Total: $0.00</h3>
+          <p id="total_proteins"><strong>Total Proteins: </strong> {{totals.proteins}} g</p>
+          <p id="total_fats"><strong>Total Fats: </strong> {{totals.fats}} g</p>
+          <p id="total_carbs"><strong>Total Carbohydrates: </strong> {{totals.carbs}} g</p>
         </div>
         <button id ="savemeal_btn">Save Meal</button>
-        <button id="checkout_btn">Checkout</button>
         <a href="{% url 'clear_cart' %}">Clear Cart</a>
+        {% endif %}
       </div>
 
       <div id = "overlay_background" class = "overlay_background"></div>
@@ -92,7 +78,7 @@
           <a href="{% url 'logout' %}" id="login">Log Out </a> 
           <span class = "vertical_divider"></span>
 
-          <span onclick = "openCart()" id="cart_btn"> 🛒 </span>
+          <a onclick = "openCart()" id="cart_btn"> 🛒 </a>
 
           </nav>
           

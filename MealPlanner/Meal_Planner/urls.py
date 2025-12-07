@@ -13,8 +13,9 @@ urlpatterns = [
     path('add_card/<str:category>', views.add_card, name='add_card'),
     path('edit_card/<str:category>/<int:primary_key>/', views.edit_card, name='edit_card'),
     
-    path('<str:category>/<int:primary_key>/add/', views.add_cart, name='add_cart'),
+    path('<int:primary_key>/add/', views.add_cart, name='add_cart'),
     path('clear_cart/', views.clear_cart, name='clear_cart'),
+
     path('<str:category>/', views.category_view, name='category'),
 ]
 

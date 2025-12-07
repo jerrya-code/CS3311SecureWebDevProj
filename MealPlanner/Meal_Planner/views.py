@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 def main(request):
     status = request.GET.get("status")  
     username = request.GET.get("user")
+    # cart_context = view_cart(request)
     return render(request, 'index.html', {"status":status, "username":username})
 
 def category_view(request, category):
@@ -114,31 +115,21 @@ def add_card(request, category):
         form = FoodCardForm()
     return render(request, 'add_card.html', {'form': form, 'category': category})
 
-def add_cart(request, category, primary_key):
+def add_cart(request, primary_key):
     card = get_object_or_404(FoodCard, pk=primary_key)
     if "cart" not in request.session:
-        request.session["cart"] = {
-            "items": [],
-            "proteins": 0,
-            "fats": 0,
-            "carbs": 0,
-        }
-
+        request.session["cart"] = {}
     cart = request.session["cart"]
-    cart["items"].append(card.pk)
-    cart["proteins"] += int(card.proteins)
-    cart["fats"] += int(card.fats)
-    cart["carbs"] += int(card.carbohydrates)
-
+    key = str(card.pk)
+    if key not in cart:
+        cart[key] = 0
+    cart[key] += 1
     request.session.modified = True
-
-    return redirect('category', category=category)
+    return redirect(request.META.get('HTTP_REFERER') or '/')
 
 def clear_cart(request):
-    request.session["cart"] = {
-            "items": [],
-            "proteins": 0,
-            "fats": 0,
-            "carbs": 0,
-        }
+    request.session["cart"] = {}
     return redirect(request.META.get('HTTP_REFERER') or '/')
+
+
+    
