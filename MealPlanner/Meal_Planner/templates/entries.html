@@ -9,6 +9,61 @@
      <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon">
   </head>
   <body>
+
+    <div id = "shopping_cart" class = "sidebar"> <!--Start Cart-->
+      <div class = "cart_content">
+        <div id = "cart_header" class="cart_header">
+          
+          <div class = "cart_header_title">
+          <h3><span>Your Cart</span></h3>
+        </div>
+
+        <span id = "cart_close_btn" class="cart_close_btn" onclick="closeCart()">&times;</span>
+      </div>
+
+        
+        <div class="cart_items">
+
+        {% if not groupped_items %}
+        <div class="empty_cart_message">
+            <p>Your cart is empty.</p>
+          </div>
+          
+          {% else %}
+          
+          {% for category, items in groupped_items.items %}
+          <div id="selected_cards">
+            <div id="selected_{{ category }}">
+              <h3>Selected {{ category }}:</h3>
+              {% for title, quantity in items.items %}
+              <h2>{{ title }} X {{ quantity }}</h2>
+              
+              <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
+              
+              {% endfor %}
+            </div>
+          </div>
+          
+          {% endfor %}
+        </div>
+          <div class="cart_actions">
+            <div class = "cart_totals">
+            <h3>Nutritional Totals:</h3>
+            <p id="total_proteins"><span id = "total_proteins"> Total Proteins:  {{totals.proteins}} g</span></p>
+            <p id="total_fats"><span id = "total_fats"> Total Fats:  {{totals.fats}} g</span></p>
+            <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
+          </div>
+            <button id ="savemeal_btn">Save Meal</button>
+            <button id = "clear_cart_btn" href="{% url 'clear_cart' %}">Clear Cart</button>
+            {% endif %}
+          </div>
+
+
+      </div> 
+    </div> <!--End Cart-->
+
+      <div id = "overlay_background" class = "overlay_background"></div>
+
     <header>
       <div id="webapp_name" class="shadow">
         <img
@@ -28,12 +83,19 @@
         <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
         <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
       </nav>
-      <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a>
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'logout' %}" class="shadow hyper" id="login"> Log Out </a>
-      {% else %}
-        <a href="{% url 'main' %}#FormSection" class="shadow hyper" id="login"> Log In </a>
-      {% endif%}
+      <!-- <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a> -->
+          {% if request.user.is_authenticated %}
+          <nav class = "shadow hyper usernav" id ="user_nav">
+          <a href="{% url 'logout' %}" id="login">Log Out </a> 
+          <span class = "vertical_divider"></span>
+
+          <a onclick = "openCart()" id="cart_btn"> 🛒 </a>
+        </nav>
+          
+          {% else %}
+          <a href="{% url 'main' %}#FormSection" class="shadow hyper" id="login"> Log In </a>
+          {% endif%}
+          
       <select class="shadow hyper" id="filter">
         <option>Regular</option>
         <option>Gluten Free</option>
