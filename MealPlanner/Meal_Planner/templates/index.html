@@ -9,8 +9,7 @@
     <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon"> <!--Was causing error w/o this-->
   </head>
   <body>
-
-    <div id = "shopping_cart" class = "sidebar"> <!--Start Cart-->
+     <div id = "shopping_cart" class = "sidebar"> <!--Start Cart-->
       <div class = "cart_content">
         <div id = "cart_header" class="cart_header">
           
@@ -29,19 +28,23 @@
             <p>Your cart is empty.</p>
           </div>
           
-        {% else %}
+          {% else %}
           
           {% for category, items in groupped_items.items %}
           <div id="selected_cards">
             <div id="selected_{{ category }}">
               <h3>Selected {{ category }}:</h3>
-              {% for title, cardi in items.items %}
-                    <h2>{{ title }} X {{ cardi.0 }}</h2>
-                    <img src="{{ cardi.1}}" alt="{{ title }}" width="80%" height="60%">
+              {% for title, quantity in items.items %}
+              <h2>{{ title }} X {{ quantity }}</h2>
+              
+              <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
+              
               {% endfor %}
             </div>
           </div>
+          
           {% endfor %}
+        </div>
           <div class="cart_actions">
             <div class = "cart_totals">
             <h3>Nutritional Totals:</h3>
@@ -50,14 +53,13 @@
             <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
           </div>
             <button id ="savemeal_btn">Save Meal</button>
-            <button id = "clear_cart_btn" ><a href="{% url 'clear_cart' %}">Clear Cart</a></button>
-        {% endif %}
+            <button id = "clear_cart_btn" href="{% url 'clear_cart' %}">Clear Cart</button>
+            {% endif %}
           </div>
 
 
       </div> 
     </div> <!--End Cart-->
-
       <div id = "overlay_background" class = "overlay_background"></div>
       
       <header>
@@ -79,7 +81,6 @@
         <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
         <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
       </nav>
-      <!-- <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a> -->
           {% if request.user.is_authenticated %}
           <nav class = "shadow hyper usernav" id ="user_nav">
           <a href="{% url 'logout' %}" id="login">Log Out </a> 
@@ -123,29 +124,6 @@
     </div> <br><br>
 
 </main>
-
-    
-
-    <!-- <main>
-      <div class="card shadow">
-        
-        <img src="MealPlanner\media\foodCard_images\40ff98ca949efc6f26cbc0233c78e87fce3eabaa_LA3s04q.jpg" alt="Food_cardTest" width="80%" height="60%"/>
-        
-        <div class = "card_content" >
-          <h2 class="item_title"> Food Meal</h2>
-          <p class = "item_desc">This is a test</p>
-
-          <div class = "nutrient_info">
-            <p><strong>Proteins: </strong>      50 g</p>
-            <p><strong>Fats: </strong>          20 g</p>
-            <p><strong>Carbohydrates: </strong> 30 g</p>
-          </div>
-        </div>
-        
-        <button class="order_btn">Select</button>
-
-      </div>
-    </main> -->
 
 
     <div id = "FormSection" class = "FormSection">
