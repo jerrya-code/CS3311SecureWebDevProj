@@ -178,7 +178,51 @@
         </div>
 
       </div>
+    <script>
+// ------------------ Random Meal ------------------- //
+const randomBtn = document.getElementById("random");
+const imageToInsert = document.getElementById("dish_photo");
+const next = document.getElementById("next");
+const previous = document.getElementById("previous");
 
+let images = [];   
+let index = 0;    
+
+randomBtn.addEventListener("click", function() {
+    fetch("{% url 'random_meal' %}")
+        .then(response => response.json())
+        .then(data => {
+            if (data.result.length > 0) {
+
+                images = data.result;   
+                index = 0;             
+
+                updateImage();          
+            }
+        })
+        .catch(error => {
+            alert("Error: " + error);
+        });
+});
+
+function updateImage() {
+    let imagePath = '/media/' + images[index];
+    imageToInsert.src = imagePath;
+}
+
+next.addEventListener("click", function () {
+    if (images.length === 0) return;
+    index = (index + 1) % images.length;  
+    updateImage();
+});
+
+
+previous.addEventListener("click", function () {
+    if (images.length === 0) return;
+    index = (index - 1 + images.length) % images.length; 
+    updateImage();
+});
+    </script>
     <script src="{% static 'Meal_Planner/script.js' %}"></script>
   </body>
 </html>

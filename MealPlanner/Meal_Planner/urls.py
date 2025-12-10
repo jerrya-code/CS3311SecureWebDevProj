@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.main, name='main'),
@@ -15,6 +16,8 @@ urlpatterns = [
     
     path('<int:primary_key>/add/', views.add_cart, name='add_cart'),
     path('clear_cart/', views.clear_cart, name='clear_cart'),
+
+    path('ajax/random-meal/', views.random_meal, name='random_meal'),
 
     path('<str:category>/', views.category_view, name='category'),
 ]

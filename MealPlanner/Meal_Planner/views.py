@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import FoodCard
@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 import logging
+import random
 
 logger = logging.getLogger(__name__)
 
@@ -131,5 +132,20 @@ def clear_cart(request):
     request.session["cart"] = {}
     return redirect(request.META.get('HTTP_REFERER') or '/')
 
+def random_meal(request):
+    allEntries = list(FoodCard.objects.filter(category__exact="entries").values('image'))
+    allSalads = list(FoodCard.objects.filter(category__exact="salads").values('image'))
+    allAppetizers = list(FoodCard.objects.filter(category__exact="appetizers").values('image'))
+    allDesserts = list(FoodCard.objects.filter(category__exact="desserts").values('image'))
+    allDrinks = list(FoodCard.objects.filter(category__exact="drinks").values('image'))
 
+    categories = [allEntries, allSalads, allAppetizers, allDesserts, allDrinks]
+    randomMeal = []
+
+    for category in categories:
+        if category:
+            randomMeal.append(random.choice(category)['image'])
+
+    data = {'result': randomMeal}
+    return JsonResponse(data)
     
