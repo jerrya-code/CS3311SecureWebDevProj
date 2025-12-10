@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('', views.main, name='main'),
@@ -19,6 +20,8 @@ urlpatterns = [
 
     path('ajax/random-meal/', views.random_meal, name='random_meal'),
 
-    path('<str:category>/', views.category_view, name='category'),
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'Meal_Planner/imgs/chef_hat.png')),
+
+    path('category/<str:category>/', views.category_view, name='category'),
 ]
 

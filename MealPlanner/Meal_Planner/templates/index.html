@@ -50,8 +50,9 @@
             <p id="total_fats"><span id = "total_fats"> Total Fats:  {{totals.fats}} g</span></p>
             <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
           </div>
-            <button id ="savemeal_btn">Save Meal</button>
-            <button id = "clear_cart_btn" href="{% url 'clear_cart' %}">Clear Cart</button>
+            <a href="{% url 'clear_cart' %}">
+              <button id = "clear_cart_btn">Clear Cart</button>
+            </a>
             {% endif %}
           </div>
 

@@ -13,7 +13,11 @@ def view_cart(request):
     }
     groupped_items = {}
     for cardpk, quantity in cart.items():
-        card = get_object_or_404(FoodCard, pk=int(cardpk))
+        try:
+            card = FoodCard.objects.get(pk=int(cardpk))
+        except FoodCard.DoesNotExist:
+            continue
+        #card = get_object_or_404(FoodCard, pk=int(cardpk)) #This causing error due to deleted item still being in cart
         if card.category not in groupped_items:
             groupped_items[card.category] = {}
         groupped_items[card.category][card.title] = {

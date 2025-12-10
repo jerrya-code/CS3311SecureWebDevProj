@@ -21,7 +21,7 @@ def main(request):
 
 def category_view(request, category):
     items = FoodCard.objects.filter(category=category)
-    return render(request, f'{category}.html', {'items': items, 'category': category})
+    return render(request, 'category.html', {'items': items, 'category': category})
 
 @login_required
 @user_passes_test(lambda u: u.is_superuser)

@@ -51,8 +51,10 @@
             <p id="total_fats"><span id = "total_fats"> Total Fats:  {{totals.fats}} g</span></p>
             <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
           </div>
-            <button id ="savemeal_btn">Save Meal</button>
-            <button id = "clear_cart_btn" href="{% url 'clear_cart' %}">Clear Cart</button>
+            <!-- <button id ="savemeal_btn">Save Meal</button> -->
+            <a href="{% url 'clear_cart' %}">
+              <button id = "clear_cart_btn">Clear Cart</button>
+            </a>
             {% endif %}
           </div>
 
@@ -75,12 +77,23 @@
       </div>
       <nav class="shadow">
         <a href="{% url 'main'%}" class="btn">Main</a>
-        <a href="{% url 'category' 'entries'%}" class="btn" id="active">Entries</a>
-        <a href="{% url 'category' 'salads'%}" class="btn">Salads</a>
-        <a href="{% url 'category' 'appetizers'%}" class="btn">Appetizers</a>
-        <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>
-        <a href="{% url 'category' 'drinks' %}" class="btn">Drinks</a>
+        
+        <a href="{% url 'category' 'entries'%}" class="btn" 
+           {% if category == 'entries' %}id="active"{% endif %}>Entries</a>
+           
+        <a href="{% url 'category' 'salads'%}" class="btn" 
+           {% if category == 'salads' %}id="active"{% endif %}>Salads</a>
+           
+        <a href="{% url 'category' 'appetizers'%}" class="btn" 
+           {% if category == 'appetizers' %}id="active"{% endif %}>Appetizers</a>
+           
+        <a href="{% url 'category' 'desserts'%}" class="btn" 
+           {% if category == 'desserts' %}id="active"{% endif %}>Desserts</a>
+           
+        <a href="{% url 'category' 'drinks' %}" class="btn" 
+           {% if category == 'drinks' %}id="active"{% endif %}>Drinks</a>
       </nav>
+
       <!-- <a href="tel:+1-123-456-7890" class="shadow hyper">+1-123-456-7890</a> -->
           {% if request.user.is_authenticated %}
           <nav class = "shadow hyper usernav" id ="user_nav">
@@ -94,18 +107,18 @@
           <a href="{% url 'main' %}#FormSection" class="shadow hyper" id="login"> Log In </a>
           {% endif%}
           
-      <select class="shadow hyper" id="filter">
-        <option>Regular</option>
-        <option>Gluten Free</option>
-        <option>Dairy Free</option>
-        <option>Nut Free</option>
-        <option>Vegetarian</option>
-      </select>
+        <select class="shadow hyper" id="filter">
+          <option>Regular</option>
+          <option>Gluten Free</option>
+          <option>Dairy Free</option>
+          <option>Nut Free</option>
+          <option>Vegetarian</option>
+        </select>
       </header>
 
     <main>
       {% for item in items %}
-      {% if item.category == category%}
+      <!-- {% if item.category == category%} -->
       <div class="card shadow" 
            data-gluten="{{ item.gluten_free }}"
            data-dairy="{{ item.dairy_free }}"
@@ -134,7 +147,7 @@
         {% endif %}
 
       </div>
-      {% endif %}
+      <!-- {% endif %} -->
       {% empty %}
       <p>No items found for this category.</p>
       {% endfor %}
@@ -144,7 +157,6 @@
       </div>
       {% endif %}
     </main>
-
     <script src="{% static 'Meal_Planner/filter.js' %}"></script>
   </body>
 </html>
