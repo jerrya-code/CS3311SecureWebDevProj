@@ -32,24 +32,35 @@
           {% else %}
           
           {% for category, items in groupped_items.items %}
-          <div id="selected_cards">
-            <div id="selected_{{ category }}">
-              <h3>Selected {{ category }}:</h3>
+          <div class="cart_category_container">
+            <h2 class="cart_category_title">Selected {{ category }}</h2>
+
               {% for title, data in items.items %}
-              <h2>{{ title }} X {{ data.quantity }}</h2>
-              <img src="{{ data.image }}" alt="{{ title }}" width="80%" height="60%"/>              
+              <div class="item_card"><div class="item_header">
+              <span class = "cart_item_name">{{ title }}</span> X <span class = "cart_item_quantity">{{ data.quantity }}</span>
+              </div>
+
+              <img src="{{ data.image }}" alt="{{ title }}" class ="cart_item_image"/>         
+            </div>        
               {% endfor %}
             </div>
-          </div>
-          
-          {% endfor %}
-        </div>
+            {% endfor %}
+      </div>
           <div class="cart_actions">
             <div class = "cart_totals">
             <h3>Nutritional Totals:</h3>
-            <p id="total_proteins"><span id = "total_proteins"> Total Proteins:  {{totals.proteins}} g</span></p>
-            <p id="total_fats"><span id = "total_fats"> Total Fats:  {{totals.fats}} g</span></p>
-            <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
+            <div class ="nutrient_row">
+            <span>Total Proteins:</span>
+            <span>{{totals.proteins}} g</span>
+            </div>
+            <div class ="nutrient_row">
+            <span>Total Fats:</span>
+            <span>{{totals.fats}} g</span>
+            </div>
+            <div class ="nutrient_row">
+            <span>Total Carbohydrates:</span>
+            <span>{{totals.carbs}} g</span>
+            </div>            
           </div>
             <!-- <button id ="savemeal_btn">Save Meal</button> -->
             <a href="{% url 'clear_cart' %}">
@@ -79,7 +90,7 @@
         <a href="{% url 'main'%}" class="btn">Main</a>
         
         <a href="{% url 'category' 'entries'%}" class="btn" 
-           {% if category == 'entries' %}id="active"{% endif %}>Entries</a>
+           {% if category == 'entries' %}id="active"{% endif %}>Entrees</a>
            
         <a href="{% url 'category' 'salads'%}" class="btn" 
            {% if category == 'salads' %}id="active"{% endif %}>Salads</a>
@@ -117,6 +128,9 @@
       </header>
 
     <main>
+      <div id="big_bgcircle" class="shadow">
+      <!-- <img src="{% static 'Meal_Planner/imgs/main_startPhoto.jpg' %}" alt="" id="dish_photo"> -->
+    </div>
       {% for item in items %}
       <!-- {% if item.category == category%} -->
       <div class="card shadow" 
@@ -125,7 +139,7 @@
            data-nut="{{ item.nut_free }}"
            data-vegetarian="{{ item.vegetarian }}">
         {% if item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
+        <img src="{{ item.image.url }}" alt="{{ item.title }}" />
         {% endif %}
         
         <div class = "card_content" >
@@ -139,13 +153,13 @@
           </div>
         </div>
 
-
-        <a class="order_a" href="{% url 'add_cart' primary_key=item.pk %}">Select</a>
-        {% if request.user.is_superuser %}
-        <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
-        <a href="{% url 'edit_card' category=item.category primary_key=item.pk %}" >Edit</a>
-        {% endif %}
-
+        <div class="card_actions">
+            <a class="order_a" id = "order_a" href="{% url 'add_cart' primary_key=item.pk %}">Select</a>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'delete_card' category=item.category primary_key=item.pk %}" >Delete</a>
+            <a href="{% url 'edit_card' category=item.category primary_key=item.pk %}" >Edit</a>
+            {% endif %}
+          </div>
       </div>
       <!-- {% endif %} -->
       {% empty %}

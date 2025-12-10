@@ -31,14 +31,17 @@
           {% else %}
           
           {% for category, items in groupped_items.items %}
-          <div id="selected_cards">
-            <div id="selected_{{ category }}">
-              <h3>Selected {{ category }}:</h3>
+           <div class="cart_category_container">
+            <h2 class="cart_category_title">Selected {{ category }}</h2>
+
               {% for title, data in items.items %}
-              <h2>{{ title }} X {{ data.quantity }}</h2>
-              <img src="{{ data.image }}" alt="{{ title }}" width="80%" height="60%"/>              
+              <div class="item_card"><div class="item_header">
+              <span class = "cart_item_name">{{ title }}</span> X <span class = "cart_item_quantity">{{ data.quantity }}</span>
+              </div>
+
+              <img src="{{ data.image }}" alt="{{ title }}" class ="cart_item_image"/>         
+            </div>        
               {% endfor %}
-            </div>
           </div>
           
           {% endfor %}
@@ -46,9 +49,18 @@
           <div class="cart_actions">
             <div class = "cart_totals">
             <h3>Nutritional Totals:</h3>
-            <p id="total_proteins"><span id = "total_proteins"> Total Proteins:  {{totals.proteins}} g</span></p>
-            <p id="total_fats"><span id = "total_fats"> Total Fats:  {{totals.fats}} g</span></p>
-            <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
+            <div class ="nutrient_row">
+            <span>Total Proteins:</span>
+            <span>{{totals.proteins}} g</span>
+            </div>
+            <div class ="nutrient_row">
+            <span>Total Fats:</span>
+            <span>{{totals.fats}} g</span>
+            </div>
+            <div class ="nutrient_row">
+            <span>Total Carbohydrates:</span>
+            <span>{{totals.carbs}} g</span>
+            </div>            
           </div>
             <a href="{% url 'clear_cart' %}">
               <button id = "clear_cart_btn">Clear Cart</button>
@@ -74,7 +86,7 @@
       </div>
       <nav class="shadow">
         <a href="{% url 'main'%}" class="btn" id="active">Main</a>
-        <a href="{% url 'category' 'entries'%}" class="btn">Entries</a>
+        <a href="{% url 'category' 'entries'%}" class="btn">Entrees</a>
         <a href="{% url 'category' 'salads'%}" class="btn">Salads</a>
         <a href="{% url 'category' 'appetizers'%}" class="btn">Appetizers</a>
         <a href="{% url 'category' 'desserts'%}" class="btn">Desserts</a>

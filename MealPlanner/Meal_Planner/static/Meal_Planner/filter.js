@@ -28,3 +28,21 @@ function closeCart() {
 }
 
 document.getElementById("overlay_background").addEventListener("click", closeCart);
+
+// ------------------ Cart Icon Animation ------------------- //
+
+function cartAnimation(){
+  const cartIcon = document.getElementById("cart_btn");
+  cartIcon.classList.add("bounce");
+  setTimeout(() => {
+    cartIcon.classList.remove("bounce");
+  }, 900);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('.order_a').forEach(link => {
+      link.addEventListener('click', function(event) {
+          cartAnimation();
+      });
+  });
+});
