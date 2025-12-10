@@ -34,11 +34,9 @@
           <div id="selected_cards">
             <div id="selected_{{ category }}">
               <h3>Selected {{ category }}:</h3>
-              {% for title, quantity in items.items %}
-              <h2>{{ title }} X {{ quantity }}</h2>
-              
-              <img src="{{ item.image.url }}" alt="{{ item.title }}" width="80%" height="60%"/>
-              
+              {% for title, data in items.items %}
+              <h2>{{ title }} X {{ data.quantity }}</h2>
+              <img src="{{ data.image }}" alt="{{ title }}" width="80%" height="60%"/>              
               {% endfor %}
             </div>
           </div>
@@ -60,6 +58,8 @@
 
       </div> 
     </div> <!--End Cart-->
+    <div id = "overlay_background" class = "overlay_background"></div>
+
     <header>
       <div id="webapp_name" class="shadow">
         <img

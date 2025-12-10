@@ -16,7 +16,10 @@ def view_cart(request):
         card = get_object_or_404(FoodCard, pk=int(cardpk))
         if card.category not in groupped_items:
             groupped_items[card.category] = {}
-        groupped_items[card.category][card.title] = quantity
+        groupped_items[card.category][card.title] = {
+            "quantity": quantity,
+            "image": card.image.url if card.image else None,
+        }
         totals['proteins'] += card.proteins * quantity
         totals['carbs'] += card.carbohydrates * quantity
         totals['fats'] += card.fats * quantity 
