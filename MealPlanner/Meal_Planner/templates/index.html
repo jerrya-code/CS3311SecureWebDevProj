@@ -9,47 +9,54 @@
     <link rel="shortcut icon" href="/static/Meal_Planner/imgs/chef_hat.png" type="image/x-icon"> <!--Was causing error w/o this-->
   </head>
   <body>
-    <div id = "shopping_cart" class = "sidebar">
 
-      <div id ="cart_header">
-
-        <div id = "cart_close_btn">
-          <span class="closebtn" onclick="closeCart()">&times;</span>
+    <div id = "shopping_cart" class = "sidebar"> <!--Start Cart-->
+      <div class = "cart_content">
+        <div id = "cart_header" class="cart_header">
+          
+          <div class = "cart_header_title">
+          <h3><span>Your Cart</span></h3>
         </div>
 
-        <div id = "cart_title"> 
-          <h3 id="cart_header_title">
-          <span>Your Cart</span>
-        </h3>
-        </div>
-        
+        <span id = "cart_close_btn" class="cart_close_btn" onclick="closeCart()">&times;</span>
       </div>
+
+        
+        <div class="cart_items">
+
         {% if not groupped_items %}
-          <div id="cart_items">
+        <div class="empty_cart_message">
             <p>Your cart is empty.</p>
           </div>
+          
         {% else %}
-{% for category, items in groupped_items.items %}
-    <div id="selected_cards">
-        <div id="selected_{{ category }}">
-            <h3>Selected {{ category }}:</h3>
-
-            {% for title, quantity in items.items %}
-                <h2>{{ title }} X {{ quantity }}</h2>
-            {% endfor %}
-        </div>
-    </div>
-{% endfor %}
-        <div id = "cart_nutrients">
-          <h3>Nutritional Info:</h3>
-          <p id="total_proteins"><strong>Total Proteins: </strong> {{totals.proteins}} g</p>
-          <p id="total_fats"><strong>Total Fats: </strong> {{totals.fats}} g</p>
-          <p id="total_carbs"><strong>Total Carbohydrates: </strong> {{totals.carbs}} g</p>
-        </div>
-        <button id ="savemeal_btn">Save Meal</button>
-        <a href="{% url 'clear_cart' %}">Clear Cart</a>
+          
+          {% for category, items in groupped_items.items %}
+          <div id="selected_cards">
+            <div id="selected_{{ category }}">
+              <h3>Selected {{ category }}:</h3>
+              {% for title, cardi in items.items %}
+                    <h2>{{ title }} X {{ cardi.0 }}</h2>
+                    <img src="{{ cardi.1}}" alt="{{ title }}" width="80%" height="60%">
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+          <div class="cart_actions">
+            <div class = "cart_totals">
+            <h3>Nutritional Totals:</h3>
+            <p id="total_proteins"><span id = "total_proteins"> Total Proteins:  {{totals.proteins}} g</span></p>
+            <p id="total_fats"><span id = "total_fats"> Total Fats:  {{totals.fats}} g</span></p>
+            <p id="total_carbs"><span id = "total_carbs"> Total Carbohydrates:  {{totals.carbs}} g</span></p>
+          </div>
+            <button id ="savemeal_btn">Save Meal</button>
+            <button id = "clear_cart_btn" ><a href="{% url 'clear_cart' %}">Clear Cart</a></button>
         {% endif %}
-      </div>
+          </div>
+
+
+      </div> 
+    </div> <!--End Cart-->
 
       <div id = "overlay_background" class = "overlay_background"></div>
       

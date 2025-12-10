@@ -15,3 +15,16 @@ filterSelect.addEventListener('change', function() {
         card.style.display = show ? "flex" : "none";
     });
 });
+
+// ------------------ Side Bar Shopping Cart ------------------- //
+function openCart() {
+  document.getElementById("shopping_cart").style.width = "535px";
+  document.getElementById("overlay_background").classList.add("active");
+}
+
+function closeCart() {
+  document.getElementById("shopping_cart").style.width = "0";
+  document.getElementById("overlay_background").classList.remove("active");
+}
+
+document.getElementById("overlay_background").addEventListener("click", closeCart);
